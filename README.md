@@ -11,6 +11,17 @@ npm test       # 26 testes de dados, roteiro e balanceamento
 
 > Precisa ser servido por HTTP (o jogo usa ES modules). Abrir o `index.html` direto do disco não funciona.
 
+## Publicar no GitHub Pages
+
+O workflow `.github/workflows/deploy-pages.yml` roda os testes em todo push e publica o site quando o commit chega ao `main`.
+
+**Antes do primeiro deploy funcionar, é preciso um ajuste manual no repositório** (não dá para fazer por API sem permissão de admin):
+
+1. **Settings → Pages → Build and deployment → Source: `GitHub Actions`**
+2. Fazer merge do código no `main`.
+
+O site fica em `https://<usuário>.github.io/AiKalica/`. Como o jogo é estático e usa só caminhos relativos, funciona no subdiretório sem nenhum ajuste de base path.
+
 ---
 
 ## O que está implementado
