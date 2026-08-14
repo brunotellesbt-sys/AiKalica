@@ -1,0 +1,276 @@
+/* ==========================================================================
+   Visual Novel — cenário, retratos, caixa de diálogo e escolhas
+   ========================================================================== */
+
+.vn {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #06050a;
+}
+
+/* --- Cenário -------------------------------------------------------------- */
+.vn-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  transition: opacity 520ms ease;
+}
+.vn-bg svg { width: 100%; height: 100%; display: block; }
+.vn-bg.swap-out { opacity: 0; }
+
+.vn-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 35%, transparent 34%, rgba(6, 5, 10, .78) 100%);
+}
+
+/* --- Palco dos personagens ------------------------------------------------ */
+.vn-cast {
+  position: absolute;
+  inset: 0 0 26% 0;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: clamp(4px, 3vw, 40px);
+  padding: 0 2vw;
+  pointer-events: none;
+}
+
+.vn-actor {
+  width: clamp(120px, 30vw, 260px);
+  max-height: 100%;
+  transition: filter 320ms ease, transform 320ms ease, opacity 320ms ease;
+  filter: brightness(.66) saturate(.78);
+  transform: translateY(6px) scale(.94);
+  opacity: .92;
+  animation: actor-in 380ms cubic-bezier(.2, .9, .3, 1) both;
+}
+.vn-actor svg { width: 100%; height: auto; display: block; }
+.vn-actor.speaking {
+  filter: brightness(1.05) drop-shadow(0 0 18px rgba(224, 163, 60, .35));
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  z-index: 3;
+}
+@keyframes actor-in { from { opacity: 0; transform: translateY(30px) scale(.9) } }
+
+.vn-actor.exit { animation: actor-out 300ms ease forwards; }
+@keyframes actor-out { to { opacity: 0; transform: translateY(22px) scale(.9) } }
+
+/* --- Barra superior -------------------------------------------------------- */
+.vn-topbar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  z-index: 12;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  background: linear-gradient(180deg, rgba(6, 5, 10, .85), transparent);
+}
+.vn-chapter {
+  font-size: clamp(9px, 2.3vw, 12px);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-shadow: 0 1px 3px #000;
+}
+.vn-topbar .spacer { flex: 1; }
+
+.icon-btn {
+  width: 34px; height: 34px;
+  display: grid;
+  place-items: center;
+  font-size: 15px;
+  border-radius: 8px;
+  border: 1px solid rgba(239, 227, 200, .35);
+  background: rgba(17, 14, 22, .72);
+  color: var(--washi);
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition);
+}
+.icon-btn:hover { background: var(--indigo); transform: translateY(-1px); }
+.icon-btn:active { transform: translateY(1px); }
+
+/* --- Caixa de diálogo ------------------------------------------------------ */
+.vn-box {
+  position: relative;
+  z-index: 10;
+  margin: auto 3vw calc(2.4vh + var(--safe-b));
+  width: calc(100% - 6vw);
+  max-width: 940px;
+  align-self: center;
+  min-height: clamp(112px, 24vh, 190px);
+  padding: 14px 16px 16px;
+  background: linear-gradient(180deg, rgba(24, 19, 30, .95), rgba(11, 9, 15, .97));
+  border: 2px solid var(--gold);
+  border-radius: 12px;
+  box-shadow: 0 12px 34px rgba(0, 0, 0, .7), inset 0 1px 0 rgba(239, 227, 200, .12);
+  cursor: pointer;
+  animation: box-in 300ms ease both;
+}
+@keyframes box-in { from { opacity: 0; transform: translateY(16px) } }
+
+.vn-box::before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border: 1px solid rgba(224, 163, 60, .22);
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+.vn-name {
+  position: absolute;
+  top: -15px;
+  left: 14px;
+  padding: 3px 16px;
+  background: linear-gradient(180deg, #e2593f, var(--vermilion-dark));
+  border: 2px solid var(--gold);
+  border-radius: 999px;
+  font-size: clamp(11px, 2.9vw, 15px);
+  font-weight: 800;
+  letter-spacing: .5px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, .5);
+  white-space: nowrap;
+  max-width: 70%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.vn-text {
+  font-size: clamp(13px, 3.4vw, 18px);
+  line-height: 1.65;
+  color: var(--washi);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .8);
+  min-height: 3.3em;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.vn-text .em { color: var(--gold); font-weight: 700; }
+.vn-box.narration .vn-text { font-style: italic; opacity: .92; text-align: center; padding: 6px 4px; }
+.vn-box.narration { border-color: rgba(239, 227, 200, .35); }
+
+.vn-next {
+  position: absolute;
+  right: 14px;
+  bottom: 8px;
+  font-size: 16px;
+  color: var(--gold);
+  animation: bob 1s ease-in-out infinite;
+}
+@keyframes bob { 0%, 100% { transform: translateY(0); opacity: .55 } 50% { transform: translateY(4px); opacity: 1 } }
+
+/* --- Escolhas -------------------------------------------------------------- */
+.vn-choices {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 6vh 5vw calc(6vh + var(--safe-b));
+  background: rgba(5, 4, 9, .55);
+  backdrop-filter: blur(2.5px);
+  overflow-y: auto;
+}
+
+.vn-choices .prompt {
+  font-family: var(--font-title);
+  font-size: clamp(13px, 3.6vw, 19px);
+  color: var(--gold);
+  text-align: center;
+  text-shadow: 0 2px 6px #000;
+  margin-bottom: 4px;
+  max-width: 680px;
+}
+
+.choice-btn {
+  width: min(560px, 92vw);
+  display: block;
+  position: relative;
+  padding: 12px 16px 12px 40px;
+  animation: choice-in 320ms cubic-bezier(.2, .9, .3, 1) both;
+}
+.choice-btn:nth-child(2) { animation-delay: 60ms }
+.choice-btn:nth-child(3) { animation-delay: 120ms }
+.choice-btn:nth-child(4) { animation-delay: 180ms }
+.choice-btn:nth-child(5) { animation-delay: 240ms }
+@keyframes choice-in { from { opacity: 0; transform: translateX(-24px) } }
+
+.choice-btn::before {
+  content: "手";
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 15px;
+  color: var(--gold);
+  opacity: .5;
+}
+.choice-btn:hover::before { opacity: 1; }
+
+.choice-btn .tag {
+  display: inline-block;
+  margin-top: 5px;
+  font-size: clamp(9px, 2.2vw, 11px);
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, .45);
+  border: 1px solid currentColor;
+  letter-spacing: .4px;
+}
+.tag.bond   { color: #ffb4c8; }
+.tag.light  { color: #9fd8ff; }
+.tag.dark   { color: #c79bff; }
+.tag.risk   { color: #ffb36b; }
+.tag.locked { color: #9a9a9a; }
+
+.choice-btn.locked { filter: grayscale(.85); opacity: .5; cursor: not-allowed; }
+
+/* --- Cartão de escolha registrada ------------------------------------------ */
+.decision-flash {
+  position: absolute;
+  top: 46%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 30;
+  padding: 10px 26px;
+  border: 2px solid var(--gold);
+  border-radius: 999px;
+  background: rgba(9, 7, 14, .92);
+  font-size: clamp(11px, 3vw, 15px);
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--gold);
+  text-align: center;
+  animation: decision 1.7s ease forwards;
+  pointer-events: none;
+}
+@keyframes decision {
+  0%   { opacity: 0; transform: translate(-50%, -50%) scale(.8) }
+  18%  { opacity: 1; transform: translate(-50%, -50%) scale(1) }
+  78%  { opacity: 1 }
+  100% { opacity: 0; transform: translate(-50%, -62%) scale(1) }
+}
+
+/* --- Histórico de diálogo -------------------------------------------------- */
+.log-list { display: flex; flex-direction: column; gap: 9px; }
+.log-item { font-size: clamp(11px, 2.9vw, 13px); line-height: 1.55; }
+.log-item b { color: var(--gold); }
+.log-item.narr { font-style: italic; opacity: .72; }
+.log-item.pick { color: #9fd8ff; border-left: 2px solid var(--chakra); padding-left: 8px; }
+
+@media (max-width: 520px) {
+  .vn-cast { inset: 0 0 30% 0; }
+  .vn-actor { width: clamp(96px, 38vw, 150px); }
+}

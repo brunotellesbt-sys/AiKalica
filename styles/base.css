@@ -1,0 +1,353 @@
+/* ==========================================================================
+   Base — paleta "pergaminho e tinta", layout global e componentes comuns
+   ========================================================================== */
+
+:root {
+  --sumi: #17131b;          /* tinta */
+  --sumi-2: #241d2b;
+  --washi: #efe3c8;         /* papel */
+  --washi-2: #dcc9a4;
+  --vermilion: #d4462f;     /* selo vermelho */
+  --vermilion-dark: #94291b;
+  --indigo: #2b3a67;
+  --indigo-light: #4c68a8;
+  --gold: #e0a33c;
+  --leaf: #4a8b52;
+  --chakra: #45c4e8;
+  --hp: #62c163;
+  --hp-low: #d4462f;
+  --danger: #e2543c;
+
+  --font-ui: "Trebuchet MS", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-title: "Georgia", "Times New Roman", serif;
+
+  --radius: 10px;
+  --shadow-hard: 0 4px 0 rgba(0, 0, 0, .45);
+  --transition: 180ms ease;
+
+  --safe-b: env(safe-area-inset-bottom, 0px);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background: #0b0910;
+  color: var(--washi);
+  font-family: var(--font-ui);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body { touch-action: manipulation; }
+
+#app {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* --- Palco: mantém proporção 16:9 e centraliza ------------------------- */
+.stage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  background: #0b0910;
+}
+
+/* --- Camadas de efeito ------------------------------------------------- */
+#fx-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 900;
+}
+
+.fx-flash {
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  animation: flash 320ms ease-out forwards;
+}
+@keyframes flash { from { opacity: .85 } to { opacity: 0 } }
+
+.fx-fade {
+  position: absolute;
+  inset: 0;
+  background: #000;
+  opacity: 0;
+  transition: opacity 360ms ease;
+}
+.fx-fade.on { opacity: 1; }
+
+.shake { animation: shake 340ms cubic-bezier(.36, .07, .19, .97) both; }
+@keyframes shake {
+  10%, 90% { transform: translateX(-2px) }
+  20%, 80% { transform: translateX(4px) }
+  30%, 50%, 70% { transform: translateX(-7px) }
+  40%, 60% { transform: translateX(7px) }
+}
+
+/* --- Toasts ------------------------------------------------------------ */
+#toast-layer {
+  position: fixed;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 950;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+  pointer-events: none;
+  width: min(92vw, 520px);
+}
+
+.toast {
+  background: linear-gradient(180deg, var(--sumi-2), var(--sumi));
+  border: 2px solid var(--gold);
+  border-radius: 999px;
+  padding: 7px 18px;
+  font-size: clamp(11px, 2.6vw, 14px);
+  font-weight: 700;
+  letter-spacing: .3px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .5);
+  animation: toast-in 260ms ease-out, toast-out 320ms ease-in forwards;
+  animation-delay: 0s, 2.1s;
+  text-align: center;
+}
+.toast.good { border-color: var(--leaf); color: #cdf0cf; }
+.toast.bad  { border-color: var(--vermilion); color: #f6cdc6; }
+.toast.info { border-color: var(--chakra); color: #cfeefa; }
+
+@keyframes toast-in  { from { opacity: 0; transform: translateY(-14px) } }
+@keyframes toast-out { to   { opacity: 0; transform: translateY(-10px) } }
+
+/* --- Botões ------------------------------------------------------------ */
+.btn {
+  font-family: var(--font-ui);
+  font-size: clamp(12px, 2.9vw, 15px);
+  font-weight: 700;
+  color: var(--washi);
+  background: linear-gradient(180deg, var(--indigo-light), var(--indigo));
+  border: 2px solid rgba(239, 227, 200, .5);
+  border-radius: var(--radius);
+  padding: 10px 18px;
+  cursor: pointer;
+  box-shadow: var(--shadow-hard);
+  transition: transform var(--transition), filter var(--transition), box-shadow var(--transition);
+  text-align: left;
+  line-height: 1.35;
+}
+.btn:hover:not(:disabled), .btn:focus-visible:not(:disabled) {
+  filter: brightness(1.2);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 rgba(0, 0, 0, .45);
+  outline: none;
+}
+.btn:active:not(:disabled) { transform: translateY(2px); box-shadow: 0 1px 0 rgba(0, 0, 0, .45); }
+.btn:disabled { opacity: .42; cursor: not-allowed; filter: grayscale(.6); }
+
+.btn.primary  { background: linear-gradient(180deg, #e2593f, var(--vermilion-dark)); }
+.btn.ghost    { background: linear-gradient(180deg, rgba(43,58,103,.5), rgba(23,19,27,.75)); }
+.btn.small    { padding: 6px 12px; font-size: clamp(10px, 2.4vw, 13px); border-width: 1px; }
+
+.btn-row { display: flex; gap: 10px; flex-wrap: wrap; }
+
+/* --- Painel pergaminho -------------------------------------------------- */
+.panel {
+  background:
+    linear-gradient(180deg, rgba(36, 29, 43, .96), rgba(17, 14, 22, .98));
+  border: 2px solid var(--gold);
+  border-radius: var(--radius);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .6), inset 0 0 40px rgba(224, 163, 60, .07);
+}
+
+.hr-ink {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  border: 0;
+  margin: 10px 0;
+  opacity: .6;
+}
+
+/* --- Barras ------------------------------------------------------------- */
+.bar {
+  position: relative;
+  height: 8px;
+  background: rgba(0, 0, 0, .55);
+  border: 1px solid rgba(239, 227, 200, .35);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.bar > i {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  transition: width 380ms cubic-bezier(.2, .8, .3, 1);
+}
+.bar.hp > i     { background: linear-gradient(180deg, #8ce08d, var(--hp)); }
+.bar.hp.low > i { background: linear-gradient(180deg, #f08b78, var(--hp-low)); }
+.bar.ck > i     { background: linear-gradient(180deg, #92e2f7, var(--chakra)); }
+.bar.xp > i     { background: linear-gradient(180deg, #f3cb84, var(--gold)); }
+.bar.will > i   { background: linear-gradient(90deg, var(--gold), #ff7a3d, var(--vermilion)); }
+
+/* --- Utilitários -------------------------------------------------------- */
+.center { display: flex; align-items: center; justify-content: center; }
+.col    { display: flex; flex-direction: column; }
+.spacer { flex: 1; }
+.muted  { opacity: .68; }
+.tiny   { font-size: clamp(9px, 2.2vw, 11px); }
+.nowrap { white-space: nowrap; }
+.hidden { display: none !important; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
+/* --- Tela de título ------------------------------------------------------ */
+.title-screen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(10px, 2.5vh, 22px);
+  padding: 4vh 5vw calc(4vh + var(--safe-b));
+  overflow-y: auto;
+}
+.title-screen .bg-art { position: absolute; inset: 0; z-index: 0; }
+.title-screen > * { position: relative; z-index: 1; }
+
+.title-screen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 40%, transparent 20%, rgba(8, 6, 12, .8) 78%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.game-logo {
+  text-align: center;
+  animation: logo-in 900ms cubic-bezier(.2, .9, .3, 1) both;
+}
+@keyframes logo-in { from { opacity: 0; transform: translateY(-24px) scale(.9) } }
+
+.game-logo h1 {
+  font-family: var(--font-title);
+  font-size: clamp(30px, 8.4vw, 62px);
+  letter-spacing: 2px;
+  color: var(--washi);
+  text-shadow: 0 0 22px rgba(224, 163, 60, .55), 0 4px 0 var(--vermilion-dark), 0 8px 22px #000;
+  line-height: 1.05;
+}
+.game-logo .sub {
+  margin-top: 6px;
+  font-size: clamp(11px, 3vw, 16px);
+  letter-spacing: clamp(2px, 1.2vw, 7px);
+  color: var(--gold);
+  text-transform: uppercase;
+}
+.game-logo .swirl {
+  width: clamp(52px, 13vw, 86px);
+  margin: 0 auto 6px;
+  display: block;
+  filter: drop-shadow(0 0 12px rgba(212, 70, 47, .8));
+  animation: spin 26s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg) } }
+
+.title-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  width: min(340px, 80vw);
+}
+.title-menu .btn { text-align: center; }
+
+.title-foot {
+  font-size: clamp(9px, 2.2vw, 11px);
+  text-align: center;
+  max-width: 640px;
+  opacity: .55;
+  line-height: 1.6;
+}
+
+/* --- Cartão de capítulo --------------------------------------------------- */
+.chapter-card {
+  position: absolute;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #06050a;
+  text-align: center;
+  padding: 5vw;
+}
+.chapter-card .kicker {
+  font-size: clamp(10px, 2.6vw, 13px);
+  letter-spacing: 6px;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+.chapter-card h2 {
+  font-family: var(--font-title);
+  font-size: clamp(22px, 6.4vw, 44px);
+  color: var(--washi);
+  text-shadow: 0 3px 0 var(--vermilion-dark);
+}
+.chapter-card .rule {
+  width: min(320px, 70vw);
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+/* --- Diálogo modal genérico ---------------------------------------------- */
+.modal-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(4, 3, 8, .72);
+  padding: 5vw;
+  backdrop-filter: blur(2px);
+}
+.modal {
+  width: min(520px, 92vw);
+  max-height: 86vh;
+  overflow-y: auto;
+  padding: 18px;
+}
+.modal h3 {
+  font-family: var(--font-title);
+  color: var(--gold);
+  margin-bottom: 8px;
+  font-size: clamp(15px, 4vw, 20px);
+}
+.modal p { font-size: clamp(12px, 3vw, 14px); line-height: 1.6; margin-bottom: 10px; }
+
+/* --- Scrollbar ----------------------------------------------------------- */
+::-webkit-scrollbar { width: 9px; height: 9px; }
+::-webkit-scrollbar-track { background: rgba(0, 0, 0, .35); }
+::-webkit-scrollbar-thumb { background: var(--indigo-light); border-radius: 9px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}

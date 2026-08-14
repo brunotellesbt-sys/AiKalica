@@ -1,0 +1,368 @@
+/* ==========================================================================
+   Batalha — campo, sprites, menu de comandos e HUD
+   ========================================================================== */
+
+.battle {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  background: #06050a;
+  overflow: hidden;
+}
+
+.battle-bg { position: absolute; inset: 0; z-index: 0; }
+.battle-bg svg { width: 100%; height: 100%; display: block; }
+.battle-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 45%, transparent 30%, rgba(6, 5, 10, .82) 100%);
+}
+
+/* --- Faixa de anúncio ------------------------------------------------------ */
+.battle-banner {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 12px;
+  background: linear-gradient(180deg, rgba(6, 5, 10, .9), transparent);
+  font-size: clamp(9px, 2.4vw, 12px);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.battle-banner .round { color: var(--washi); opacity: .8; }
+
+/* --- Barra de Vontade de Fogo ---------------------------------------------- */
+.will-meter {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+}
+.will-meter .bar { width: clamp(60px, 18vw, 130px); height: 9px; }
+.will-meter .lbl { font-size: clamp(8px, 2.1vw, 10px); letter-spacing: 1px; }
+.will-meter.ready .lbl { color: #ff9a4d; animation: pulse-will 1.1s ease-in-out infinite; }
+@keyframes pulse-will { 50% { opacity: .45 } }
+
+/* --- Campo ------------------------------------------------------------------ */
+.field {
+  position: relative;
+  z-index: 5;
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 2vw;
+  padding: clamp(30px, 7vh, 60px) 3vw 6px;
+  min-height: 0;
+}
+
+.side {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(2px, 1.4vh, 12px);
+  height: 100%;
+}
+.side.allies  { align-items: flex-start; }
+.side.foes    { align-items: flex-end; }
+
+/* --- Unidade ---------------------------------------------------------------- */
+.unit {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: transform 240ms ease, opacity 320ms ease, filter 240ms ease;
+}
+.side.foes .unit { flex-direction: row-reverse; }
+
+.unit-sprite {
+  width: clamp(52px, 15vw, 104px);
+  flex-shrink: 0;
+  position: relative;
+}
+.unit-sprite svg { width: 100%; height: auto; display: block; }
+
+.unit.back { opacity: .82; transform: scale(.86); }
+.unit.acting { transform: scale(1.1); filter: drop-shadow(0 0 14px rgba(224, 163, 60, .75)); z-index: 6; }
+.unit.targeted .unit-sprite::after {
+  content: "";
+  position: absolute;
+  inset: -8%;
+  border: 2px dashed var(--vermilion);
+  border-radius: 50%;
+  animation: spin 3.5s linear infinite;
+}
+.unit.selectable { cursor: pointer; }
+.unit.selectable:hover { transform: scale(1.06); filter: brightness(1.25); }
+
+.unit.hurt   { animation: hurt 320ms ease; }
+.unit.strike { animation: strike 340ms cubic-bezier(.3, .9, .4, 1); }
+.side.foes .unit.strike { animation-name: strike-rev; }
+@keyframes hurt   { 25% { transform: translateX(-8px); filter: brightness(2.4) sepia(1) hue-rotate(-40deg) } 60% { transform: translateX(6px) } }
+@keyframes strike { 40% { transform: translateX(26px) scale(1.08) } }
+@keyframes strike-rev { 40% { transform: translateX(-26px) scale(1.08) } }
+
+.unit.down { animation: down 520ms ease forwards; pointer-events: none; }
+@keyframes down { to { opacity: .18; transform: rotate(-14deg) translateY(14px) scale(.86); filter: grayscale(1) } }
+
+/* --- Placa de status da unidade ---------------------------------------------- */
+.unit-plate {
+  min-width: clamp(84px, 24vw, 148px);
+  padding: 4px 7px;
+  background: rgba(9, 7, 14, .84);
+  border: 1px solid rgba(239, 227, 200, .3);
+  border-left: 3px solid var(--indigo-light);
+  border-radius: 6px;
+  font-size: clamp(9px, 2.2vw, 11px);
+}
+.side.foes .unit-plate { border-left: 1px solid rgba(239, 227, 200, .3); border-right: 3px solid var(--vermilion); text-align: right; }
+.unit-plate .nm { font-weight: 700; letter-spacing: .3px; display: flex; align-items: center; gap: 4px; }
+.side.foes .unit-plate .nm { justify-content: flex-end; }
+.unit-plate .lv { opacity: .6; font-weight: 400; }
+.unit-plate .bar { margin-top: 3px; height: 6px; }
+.unit-plate .nums { display: flex; justify-content: space-between; opacity: .75; margin-top: 2px; font-size: .92em; }
+.side.foes .unit-plate .nums { flex-direction: row-reverse; }
+
+.unit.active-turn .unit-plate { border-color: var(--gold); box-shadow: 0 0 0 1px var(--gold), 0 0 14px rgba(224, 163, 60, .35); }
+
+/* --- Ícones de status --------------------------------------------------------- */
+.status-icons { display: flex; gap: 2px; flex-wrap: wrap; margin-top: 2px; }
+.side.foes .status-icons { justify-content: flex-end; }
+.st-icon {
+  font-size: clamp(8px, 2vw, 10px);
+  padding: 0 3px;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, .5);
+  border: 1px solid currentColor;
+  line-height: 1.4;
+}
+.st-icon.poison { color: #b884e8 }
+.st-icon.burn   { color: #ff8a5c }
+.st-icon.para   { color: #f0d95c }
+.st-icon.bind   { color: #b09070 }
+.st-icon.wet    { color: #7fd2f0 }
+.st-icon.conf   { color: #ff9ed6 }
+.st-icon.guard  { color: #9fd8ff }
+.st-icon.subs   { color: #cfcfcf }
+.st-icon.atkup  { color: #ffce6b }
+.st-icon.defdn  { color: #ff7a7a }
+.st-icon.regen  { color: #8ce08d }
+
+/* --- Números flutuantes -------------------------------------------------------- */
+.float-num {
+  position: absolute;
+  left: 50%;
+  top: 10%;
+  transform: translateX(-50%);
+  font-size: clamp(14px, 4.2vw, 26px);
+  font-weight: 900;
+  font-family: var(--font-title);
+  text-shadow: 0 2px 0 #000, 0 0 12px currentColor;
+  pointer-events: none;
+  z-index: 20;
+  animation: float-up 900ms ease-out forwards;
+  white-space: nowrap;
+}
+.float-num.dmg  { color: #ff6a4d }
+.float-num.heal { color: #7fe07f }
+.float-num.ck   { color: var(--chakra) }
+.float-num.miss { color: #cfcfcf; font-size: clamp(11px, 3vw, 18px) }
+.float-num.crit { color: var(--gold); font-size: clamp(17px, 5.2vw, 32px) }
+.float-num.weak { color: #ffd166 }
+.float-num.resist { color: #9aa7c0 }
+@keyframes float-up {
+  0%   { opacity: 0; transform: translate(-50%, 10px) scale(.6) }
+  22%  { opacity: 1; transform: translate(-50%, -8px) scale(1.15) }
+  100% { opacity: 0; transform: translate(-50%, -52px) scale(1) }
+}
+
+/* --- Efeito de jutsu ------------------------------------------------------------ */
+.jutsu-fx {
+  position: absolute;
+  inset: 0;
+  z-index: 25;
+  pointer-events: none;
+  display: grid;
+  place-items: center;
+}
+.jutsu-name {
+  font-family: var(--font-title);
+  font-size: clamp(16px, 5.4vw, 38px);
+  font-weight: 900;
+  letter-spacing: 3px;
+  color: var(--washi);
+  text-shadow: 0 0 22px currentColor, 0 3px 0 #000;
+  animation: jutsu-name 1100ms ease-out forwards;
+  text-align: center;
+  padding: 0 4vw;
+}
+@keyframes jutsu-name {
+  0%   { opacity: 0; transform: scale(1.6) }
+  20%  { opacity: 1; transform: scale(1) }
+  72%  { opacity: 1 }
+  100% { opacity: 0; transform: scale(.95) translateY(-16px) }
+}
+.elem-fire      { color: #ff7a3d }
+.elem-wind      { color: #96e8b0 }
+.elem-lightning { color: #ffe066 }
+.elem-earth     { color: #c79a63 }
+.elem-water     { color: #6fc9f0 }
+.elem-none      { color: #dcd0f0 }
+
+.fx-burst {
+  position: absolute;
+  width: 40vmin; height: 40vmin;
+  border-radius: 50%;
+  background: radial-gradient(circle, currentColor 0%, transparent 66%);
+  opacity: .5;
+  animation: burst 620ms ease-out forwards;
+}
+@keyframes burst { from { transform: scale(.15); opacity: .85 } to { transform: scale(1.5); opacity: 0 } }
+
+/* --- Log de combate --------------------------------------------------------------- */
+.battle-log {
+  position: relative;
+  z-index: 12;
+  margin: 0 3vw 4px;
+  padding: 5px 10px;
+  min-height: 2.6em;
+  max-height: 4.4em;
+  overflow: hidden;
+  background: rgba(6, 5, 10, .8);
+  border-left: 3px solid var(--gold);
+  border-radius: 4px;
+  font-size: clamp(10px, 2.7vw, 13px);
+  line-height: 1.4;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.battle-log p { animation: log-in 220ms ease both; }
+.battle-log p.hi { color: var(--gold); font-weight: 700; }
+@keyframes log-in { from { opacity: 0; transform: translateY(6px) } }
+
+/* --- Painel de comandos ------------------------------------------------------------- */
+.cmd-panel {
+  position: relative;
+  z-index: 15;
+  margin: 0 2vw calc(1.4vh + var(--safe-b));
+  padding: 8px;
+  background: linear-gradient(180deg, rgba(24, 19, 30, .96), rgba(10, 8, 14, .98));
+  border: 2px solid var(--gold);
+  border-radius: 12px;
+  box-shadow: 0 -6px 26px rgba(0, 0, 0, .65);
+  min-height: clamp(96px, 20vh, 150px);
+}
+
+.cmd-who {
+  font-size: clamp(10px, 2.6vw, 13px);
+  color: var(--gold);
+  font-weight: 700;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.cmd-who .chip {
+  font-size: .85em;
+  padding: 1px 7px;
+  border-radius: 999px;
+  border: 1px solid rgba(239, 227, 200, .35);
+  color: var(--washi);
+  opacity: .8;
+}
+
+.cmd-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(120px, 44%), 1fr));
+  gap: 6px;
+}
+.cmd-grid.list { grid-template-columns: repeat(auto-fit, minmax(min(190px, 100%), 1fr)); max-height: clamp(110px, 26vh, 210px); overflow-y: auto; }
+
+.cmd-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  text-align: left;
+  font-size: clamp(11px, 2.7vw, 13px);
+  overflow: hidden;
+}
+.cmd-btn .ico { font-size: 1.15em; flex-shrink: 0; }
+/* O rótulo cede espaço antes de qualquer coisa vazar para o botão vizinho. */
+.cmd-btn > span:not(.ico):not(.meta) {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cmd-btn .meta {
+  margin-left: auto;
+  flex-shrink: 0;
+  font-size: .85em;
+  opacity: .8;
+  white-space: nowrap;
+}
+.cmd-btn .meta.ck { color: var(--chakra); }
+.cmd-btn small {
+  display: block;
+  opacity: .6;
+  font-weight: 400;
+  font-size: .82em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cmd-hint {
+  margin-top: 6px;
+  font-size: clamp(9px, 2.2vw, 11px);
+  opacity: .6;
+  min-height: 1.3em;
+  line-height: 1.35;
+}
+
+/* --- Resultado ------------------------------------------------------------------------ */
+.battle-result {
+  position: absolute;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 6vh 6vw calc(6vh + var(--safe-b));
+  background: rgba(5, 4, 9, .9);
+  overflow-y: auto;
+}
+.battle-result h2 {
+  font-family: var(--font-title);
+  font-size: clamp(24px, 8vw, 48px);
+  color: var(--gold);
+  text-shadow: 0 4px 0 var(--vermilion-dark), 0 0 24px rgba(224, 163, 60, .5);
+  animation: logo-in 500ms cubic-bezier(.2, .9, .3, 1) both;
+}
+.battle-result h2.lose { color: #b9b3c4; text-shadow: 0 4px 0 #1e1a26; }
+
+.reward-list {
+  width: min(460px, 92vw);
+  padding: 12px 16px;
+  font-size: clamp(11px, 3vw, 14px);
+}
+.reward-row { display: flex; justify-content: space-between; padding: 3px 0; gap: 10px; }
+.reward-row b { color: var(--gold); }
+.levelup { color: #ffd97a; font-weight: 700; animation: pulse-will 1s ease-in-out infinite; }
+
+@media (max-width: 560px) {
+  .field { padding-top: clamp(26px, 6vh, 44px); gap: 1vw; }
+  .unit-plate { min-width: 78px; }
+}
