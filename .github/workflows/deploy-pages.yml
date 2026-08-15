@@ -41,6 +41,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
+        with:
+          # Tenta habilitar o Pages sozinho, evitando o passo manual em
+          # Settings → Pages. Se a permissão não bastar, aí sim é preciso
+          # trocar o Source para "GitHub Actions" na mão.
+          enablement: true
       - name: Empacotar o site
         uses: actions/upload-pages-artifact@v3
         with:

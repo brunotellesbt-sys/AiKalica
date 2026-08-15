@@ -15,10 +15,9 @@ npm test       # 26 testes de dados, roteiro e balanceamento
 
 O workflow `.github/workflows/deploy-pages.yml` roda os testes em todo push e publica o site quando o commit chega ao `main`.
 
-**Antes do primeiro deploy funcionar, é preciso um ajuste manual no repositório** (não dá para fazer por API sem permissão de admin):
+O passo `configure-pages` usa `enablement: true`, então tenta habilitar o Pages sozinho no primeiro deploy. Se a permissão do token não for suficiente, o job falha em *"Get Pages site failed"* — nesse caso basta ajustar uma vez na mão:
 
-1. **Settings → Pages → Build and deployment → Source: `GitHub Actions`**
-2. Fazer merge do código no `main`.
+**Settings → Pages → Build and deployment → Source: `GitHub Actions`**
 
 O site fica em `https://<usuário>.github.io/AiKalica/`. Como o jogo é estático e usa só caminhos relativos, funciona no subdiretório sem nenhum ajuste de base path.
 
