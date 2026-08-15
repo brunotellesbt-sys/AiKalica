@@ -6,8 +6,7 @@ import {
 } from '../core/ui.js';
 import { sfx, music, unlock } from '../core/audio.js';
 import { settings, autosave } from '../core/save.js';
-import { portrait } from '../art/portraits.js';
-import { background } from '../art/backgrounds.js';
+import { portraitNode, backgroundNode } from '../art/assets.js';
 import { CHARACTERS } from '../data/characters.js';
 import { ENEMIES } from '../data/enemies.js';
 import { ITEMS } from '../data/items.js';
@@ -20,7 +19,7 @@ import {
 } from '../core/state.js';
 import { runBattle } from './battle-ui.js';
 import { openMenu, openShop } from './menu.js';
-import { openHub } from './hub.js';
+import { openOverworld } from './overworld.js';
 import { showEnding } from './ending.js';
 
 let ui = null;
@@ -85,7 +84,7 @@ async function ensureMounted() {
 
 function setBackground(id, tint) {
   const fresh = el('div.vn-bg');
-  fresh.append(svgNode(background(id, tint ? { tint, tintOpacity: .35 } : {})));
+  fresh.append(backgroundNode(id, tint ? { tint, tintOpacity: .35 } : {}));
   fresh.style.opacity = '0';
   ui.root.insertBefore(fresh, ui.bgEl.nextSibling);
   requestAnimationFrame(() => { fresh.style.opacity = '1'; });
@@ -101,7 +100,7 @@ function syncCast(ids) {
   for (const id of stage) {
     const sp = speakerOf(id);
     const node = el('div.vn-actor', { dataset: { id } });
-    node.append(svgNode(portrait(sp.art, 'neutral')));
+    node.append(portraitNode(id, 'neutral', { art: sp.art, element: state.hero?.element, alt: sp.name }));
     ui.castEl.append(node);
   }
 }
@@ -120,7 +119,7 @@ function highlight(id, emo) {
     if (on) {
       const sp = speakerOf(id);
       clear(node);
-      node.append(svgNode(portrait(sp.art, emo || 'neutral')));
+      node.append(portraitNode(id, emo || 'neutral', { art: sp.art, element: state.hero?.element, alt: sp.name }));
     }
   }
 }
@@ -448,7 +447,7 @@ async function exec(node) {
       return null;
 
     case 'hub': {
-      const chosen = await openHub({ tier: node.tier, title: node.title });
+      const chosen = await openOverworld({ tier: node.tier, title: node.title });
       await ensureMounted();
 
       if (chosen?.scene) {

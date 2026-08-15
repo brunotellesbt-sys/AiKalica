@@ -1,0 +1,60 @@
+<svg viewBox="0 0 120 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="lutador"
+      >
+    <defs>
+      <radialGradient id="sa6s" cx="40%" cy="30%" r="70%">
+        <stop offset="0%" stop-color="#debd9a"/><stop offset="100%" stop-color="#b69776"/>
+      </radialGradient>
+      
+    </defs>
+
+    <ellipse cx="60" cy="163" rx="30" ry="6" fill="#000" opacity=".38"/>
+    
+
+    <g>
+      <animateTransform attributeName="transform" type="translate"
+        values="0 0; 0 -2.5; 0 0" dur="2.6s" repeatCount="indefinite"/>
+
+      <!-- pernas -->
+      <rect x="44" y="126" width="13" height="30" rx="6" fill="#6b6a3a"/>
+      <rect x="63" y="126" width="13" height="30" rx="6" fill="#6b6a3a"/>
+      <rect x="42" y="150" width="17" height="10" rx="4" fill="#2b2430"/>
+      <rect x="61" y="150" width="17" height="10" rx="4" fill="#2b2430"/>
+
+      <!-- tronco -->
+      <path d="M 38 92 Q 60 84 82 92 L 86 132 Q 60 140 34 132 Z"
+            fill="#4a4256" stroke="#2c2834" stroke-width="2"/>
+      <path d="M 60 86 L 60 136" stroke="#35303e" stroke-width="2.5"/>
+      <path d="M 38 92 Q 60 84 82 92 L 83 102 Q 60 94 37 102 Z" fill="#6b6a3a"/>
+      
+
+      <!-- braços -->
+      <rect x="24" y="94" width="12" height="34" rx="6" fill="#d9b48c" transform="rotate(9 30 94)"/>
+      <rect x="84" y="94" width="12" height="34" rx="6" fill="#d9b48c" transform="rotate(-9 90 94)"/>
+
+      <!-- cabeça -->
+      <g>
+        <path d="M 26 46 L 14 18 L 34 30 L 30 2 L 48 24 L 54 -4 L 68 22 L 82 -2 L 88 26 L 106 8 L 104 34 L 118 20 L 96 48 Q 60 26 26 46 Z" fill="#5f5346" transform="translate(0 2)"/>
+        <circle cx="60" cy="50" r="33" fill="url(#sa6s)" stroke="#987e62" stroke-width="2"/>
+        
+        
+        
+          <ellipse cx="47" cy="54" rx="5.5" ry="7" fill="#fff"/>
+          <circle cx="48" cy="55" r="3.4" fill="#9a8a4a"/>
+          <ellipse cx="73" cy="54" rx="5.5" ry="7" fill="#fff"/>
+          <circle cx="72" cy="55" r="3.4" fill="#9a8a4a"/>
+          <path d="M 54 70 Q 60 74 66 70" stroke="#3a2028" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+        
+        
+        <path d="M 26 46 L 14 18 L 34 30 L 30 2 L 48 24 L 54 -4 L 68 22 L 82 -2 L 88 26 L 106 8 L 104 34 L 118 20 L 96 48 Q 60 26 26 46 Z" fill="#7a6a5a" stroke="#3d352d" stroke-width="1.4" stroke-linejoin="round"/>
+        <g >
+            <rect x="24" y="24" width="72" height="15" rx="4" fill="#2b3a67"/>
+            <rect x="42" y="22" width="36" height="18" rx="3" fill="#b9c0c9" stroke="#7d848d" stroke-width="1.6"/>
+            <g transform="translate(60 31) scale(.62)" fill="none" stroke="#5c636b" stroke-width="3" stroke-linecap="round">
+              <path d="M 0 -7 C 7 -7 9 0 3 4 C -2 7 -7 4 -6 -1"/><path d="M -6 -1 L -11 8"/>
+            </g>
+            <path d="M 28 20 L 92 42" stroke="#4a4a52" stroke-width="3" stroke-linecap="round"/>
+          </g>
+        
+      </g>
+    </g>
+  </svg>

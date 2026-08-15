@@ -1,0 +1,151 @@
+/* ==========================================================================
+   Overworld — o vilarejo andável
+   ========================================================================== */
+
+.overworld {
+  position: absolute;
+  inset: 0;
+  z-index: 380;
+  overflow: hidden;
+  background: #2b3a2b;
+  touch-action: none;
+  user-select: none;
+}
+
+.ow-canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  image-rendering: auto;
+}
+
+/* --- Faixa superior ------------------------------------------------------- */
+.ow-banner {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  z-index: 3;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 8px 12px 14px;
+  background: linear-gradient(180deg, rgba(6, 5, 10, .88), transparent);
+  pointer-events: none;
+}
+.ow-place {
+  font-family: var(--font-title);
+  font-size: clamp(12px, 3.2vw, 16px);
+  color: var(--gold);
+  text-shadow: 0 2px 4px #000;
+}
+.ow-info {
+  font-size: clamp(9px, 2.4vw, 12px);
+  opacity: .8;
+  font-style: italic;
+  text-shadow: 0 1px 3px #000;
+}
+
+/* --- Dica de interação ---------------------------------------------------- */
+.ow-hint {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(96px, 22vh, 150px);
+  transform: translateX(-50%);
+  z-index: 4;
+  max-width: min(90vw, 520px);
+  padding: 8px 16px;
+  background: rgba(9, 7, 14, .92);
+  border: 2px solid var(--gold);
+  border-radius: 999px;
+  font-size: clamp(10px, 2.7vw, 13px);
+  font-weight: 700;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 160ms ease;
+  pointer-events: none;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .6);
+}
+.ow-hint.on { opacity: 1; }
+
+/* --- Controles ------------------------------------------------------------ */
+.ow-controls {
+  position: absolute;
+  left: 0; right: 0;
+  bottom: calc(10px + var(--safe-b));
+  z-index: 5;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 0 clamp(10px, 4vw, 32px);
+  pointer-events: none;
+}
+.ow-controls > * { pointer-events: auto; }
+
+.ow-dpad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  width: clamp(120px, 34vw, 168px);
+  aspect-ratio: 1;
+  gap: 4px;
+}
+.ow-key {
+  display: grid;
+  place-items: center;
+  font-size: clamp(14px, 4vw, 20px);
+  color: var(--washi);
+  background: rgba(24, 19, 30, .82);
+  border: 2px solid rgba(224, 163, 60, .55);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 100ms ease, transform 100ms ease;
+}
+.ow-key:active { background: var(--indigo-light); transform: scale(.93); }
+.ow-key.up    { grid-area: 1 / 2; }
+.ow-key.left  { grid-area: 2 / 1; }
+.ow-key.right { grid-area: 2 / 3; }
+.ow-key.down  { grid-area: 3 / 2; }
+
+.ow-action {
+  padding: clamp(14px, 4vw, 22px) clamp(16px, 5vw, 30px);
+  font-size: clamp(12px, 3.2vw, 15px);
+  font-weight: 800;
+  letter-spacing: .5px;
+  color: var(--washi);
+  background: linear-gradient(180deg, #e2593f, var(--vermilion-dark));
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+  aspect-ratio: 1;
+  cursor: pointer;
+  box-shadow: 0 5px 0 rgba(0, 0, 0, .45);
+  transition: transform 100ms ease;
+}
+.ow-action:active { transform: translateY(4px); box-shadow: 0 1px 0 rgba(0, 0, 0, .45); }
+
+.ow-legend {
+  position: absolute;
+  left: 50%;
+  bottom: calc(4px + var(--safe-b));
+  transform: translateX(-50%);
+  z-index: 4;
+  font-size: clamp(8px, 2.1vw, 10px);
+  opacity: .5;
+  text-align: center;
+  pointer-events: none;
+  text-shadow: 0 1px 3px #000;
+  white-space: nowrap;
+}
+
+/* Em telas estreitas o teclado não existe: a legenda só atrapalha. */
+@media (max-width: 640px), (pointer: coarse) {
+  .ow-legend { display: none; }
+}
+/* Em telas largas com mouse, o d-pad é redundante. */
+@media (min-width: 900px) and (pointer: fine) {
+  .ow-dpad { opacity: .35; transition: opacity 200ms ease; }
+  .ow-dpad:hover { opacity: 1; }
+}
+
+/* --- Imagens de arte vindas de assets/ ------------------------------------ */
+.art { display: block; width: 100%; height: auto; }
+.art.flip { transform: scaleX(-1); }

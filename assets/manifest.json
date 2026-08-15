@@ -1,0 +1,652 @@
+{
+  "generatedAt": "2026-08-15T07:45:21.616Z",
+  "note": "Gerado por tools/build-assets.mjs. Qualquer arquivo aqui pode ser substituído por arte feita à mão — o jogo carrega o arquivo e só volta a desenhar por código se ele faltar.",
+  "emotions": [
+    "neutral",
+    "happy",
+    "laugh",
+    "angry",
+    "determined",
+    "sad",
+    "shock",
+    "scared",
+    "smug",
+    "closed"
+  ],
+  "directions": [
+    "down",
+    "up",
+    "left",
+    "right"
+  ],
+  "frames": 3,
+  "characters": {
+    "hero": {
+      "fire": {
+        "portrait": {
+          "neutral": "characters/hero/fire/portrait/neutral.svg",
+          "happy": "characters/hero/fire/portrait/happy.svg",
+          "laugh": "characters/hero/fire/portrait/laugh.svg",
+          "angry": "characters/hero/fire/portrait/angry.svg",
+          "determined": "characters/hero/fire/portrait/determined.svg",
+          "sad": "characters/hero/fire/portrait/sad.svg",
+          "shock": "characters/hero/fire/portrait/shock.svg",
+          "scared": "characters/hero/fire/portrait/scared.svg",
+          "smug": "characters/hero/fire/portrait/smug.svg",
+          "closed": "characters/hero/fire/portrait/closed.svg"
+        },
+        "walk": {
+          "down-0": "characters/hero/fire/walk/down-0.svg",
+          "down-1": "characters/hero/fire/walk/down-1.svg",
+          "down-2": "characters/hero/fire/walk/down-2.svg",
+          "up-0": "characters/hero/fire/walk/up-0.svg",
+          "up-1": "characters/hero/fire/walk/up-1.svg",
+          "up-2": "characters/hero/fire/walk/up-2.svg",
+          "left-0": "characters/hero/fire/walk/left-0.svg",
+          "left-1": "characters/hero/fire/walk/left-1.svg",
+          "left-2": "characters/hero/fire/walk/left-2.svg",
+          "right-0": "characters/hero/fire/walk/right-0.svg",
+          "right-1": "characters/hero/fire/walk/right-1.svg",
+          "right-2": "characters/hero/fire/walk/right-2.svg"
+        },
+        "face": "characters/hero/fire/face.svg",
+        "battle": "characters/hero/fire/battle.svg"
+      },
+      "wind": {
+        "portrait": {
+          "neutral": "characters/hero/wind/portrait/neutral.svg",
+          "happy": "characters/hero/wind/portrait/happy.svg",
+          "laugh": "characters/hero/wind/portrait/laugh.svg",
+          "angry": "characters/hero/wind/portrait/angry.svg",
+          "determined": "characters/hero/wind/portrait/determined.svg",
+          "sad": "characters/hero/wind/portrait/sad.svg",
+          "shock": "characters/hero/wind/portrait/shock.svg",
+          "scared": "characters/hero/wind/portrait/scared.svg",
+          "smug": "characters/hero/wind/portrait/smug.svg",
+          "closed": "characters/hero/wind/portrait/closed.svg"
+        },
+        "walk": {
+          "down-0": "characters/hero/wind/walk/down-0.svg",
+          "down-1": "characters/hero/wind/walk/down-1.svg",
+          "down-2": "characters/hero/wind/walk/down-2.svg",
+          "up-0": "characters/hero/wind/walk/up-0.svg",
+          "up-1": "characters/hero/wind/walk/up-1.svg",
+          "up-2": "characters/hero/wind/walk/up-2.svg",
+          "left-0": "characters/hero/wind/walk/left-0.svg",
+          "left-1": "characters/hero/wind/walk/left-1.svg",
+          "left-2": "characters/hero/wind/walk/left-2.svg",
+          "right-0": "characters/hero/wind/walk/right-0.svg",
+          "right-1": "characters/hero/wind/walk/right-1.svg",
+          "right-2": "characters/hero/wind/walk/right-2.svg"
+        },
+        "face": "characters/hero/wind/face.svg",
+        "battle": "characters/hero/wind/battle.svg"
+      },
+      "lightning": {
+        "portrait": {
+          "neutral": "characters/hero/lightning/portrait/neutral.svg",
+          "happy": "characters/hero/lightning/portrait/happy.svg",
+          "laugh": "characters/hero/lightning/portrait/laugh.svg",
+          "angry": "characters/hero/lightning/portrait/angry.svg",
+          "determined": "characters/hero/lightning/portrait/determined.svg",
+          "sad": "characters/hero/lightning/portrait/sad.svg",
+          "shock": "characters/hero/lightning/portrait/shock.svg",
+          "scared": "characters/hero/lightning/portrait/scared.svg",
+          "smug": "characters/hero/lightning/portrait/smug.svg",
+          "closed": "characters/hero/lightning/portrait/closed.svg"
+        },
+        "walk": {
+          "down-0": "characters/hero/lightning/walk/down-0.svg",
+          "down-1": "characters/hero/lightning/walk/down-1.svg",
+          "down-2": "characters/hero/lightning/walk/down-2.svg",
+          "up-0": "characters/hero/lightning/walk/up-0.svg",
+          "up-1": "characters/hero/lightning/walk/up-1.svg",
+          "up-2": "characters/hero/lightning/walk/up-2.svg",
+          "left-0": "characters/hero/lightning/walk/left-0.svg",
+          "left-1": "characters/hero/lightning/walk/left-1.svg",
+          "left-2": "characters/hero/lightning/walk/left-2.svg",
+          "right-0": "characters/hero/lightning/walk/right-0.svg",
+          "right-1": "characters/hero/lightning/walk/right-1.svg",
+          "right-2": "characters/hero/lightning/walk/right-2.svg"
+        },
+        "face": "characters/hero/lightning/face.svg",
+        "battle": "characters/hero/lightning/battle.svg"
+      },
+      "earth": {
+        "portrait": {
+          "neutral": "characters/hero/earth/portrait/neutral.svg",
+          "happy": "characters/hero/earth/portrait/happy.svg",
+          "laugh": "characters/hero/earth/portrait/laugh.svg",
+          "angry": "characters/hero/earth/portrait/angry.svg",
+          "determined": "characters/hero/earth/portrait/determined.svg",
+          "sad": "characters/hero/earth/portrait/sad.svg",
+          "shock": "characters/hero/earth/portrait/shock.svg",
+          "scared": "characters/hero/earth/portrait/scared.svg",
+          "smug": "characters/hero/earth/portrait/smug.svg",
+          "closed": "characters/hero/earth/portrait/closed.svg"
+        },
+        "walk": {
+          "down-0": "characters/hero/earth/walk/down-0.svg",
+          "down-1": "characters/hero/earth/walk/down-1.svg",
+          "down-2": "characters/hero/earth/walk/down-2.svg",
+          "up-0": "characters/hero/earth/walk/up-0.svg",
+          "up-1": "characters/hero/earth/walk/up-1.svg",
+          "up-2": "characters/hero/earth/walk/up-2.svg",
+          "left-0": "characters/hero/earth/walk/left-0.svg",
+          "left-1": "characters/hero/earth/walk/left-1.svg",
+          "left-2": "characters/hero/earth/walk/left-2.svg",
+          "right-0": "characters/hero/earth/walk/right-0.svg",
+          "right-1": "characters/hero/earth/walk/right-1.svg",
+          "right-2": "characters/hero/earth/walk/right-2.svg"
+        },
+        "face": "characters/hero/earth/face.svg",
+        "battle": "characters/hero/earth/battle.svg"
+      },
+      "water": {
+        "portrait": {
+          "neutral": "characters/hero/water/portrait/neutral.svg",
+          "happy": "characters/hero/water/portrait/happy.svg",
+          "laugh": "characters/hero/water/portrait/laugh.svg",
+          "angry": "characters/hero/water/portrait/angry.svg",
+          "determined": "characters/hero/water/portrait/determined.svg",
+          "sad": "characters/hero/water/portrait/sad.svg",
+          "shock": "characters/hero/water/portrait/shock.svg",
+          "scared": "characters/hero/water/portrait/scared.svg",
+          "smug": "characters/hero/water/portrait/smug.svg",
+          "closed": "characters/hero/water/portrait/closed.svg"
+        },
+        "walk": {
+          "down-0": "characters/hero/water/walk/down-0.svg",
+          "down-1": "characters/hero/water/walk/down-1.svg",
+          "down-2": "characters/hero/water/walk/down-2.svg",
+          "up-0": "characters/hero/water/walk/up-0.svg",
+          "up-1": "characters/hero/water/walk/up-1.svg",
+          "up-2": "characters/hero/water/walk/up-2.svg",
+          "left-0": "characters/hero/water/walk/left-0.svg",
+          "left-1": "characters/hero/water/walk/left-1.svg",
+          "left-2": "characters/hero/water/walk/left-2.svg",
+          "right-0": "characters/hero/water/walk/right-0.svg",
+          "right-1": "characters/hero/water/walk/right-1.svg",
+          "right-2": "characters/hero/water/walk/right-2.svg"
+        },
+        "face": "characters/hero/water/face.svg",
+        "battle": "characters/hero/water/battle.svg"
+      }
+    },
+    "naruto": {
+      "default": {
+        "portrait": {
+          "neutral": "characters/naruto/portrait/neutral.svg",
+          "happy": "characters/naruto/portrait/happy.svg",
+          "laugh": "characters/naruto/portrait/laugh.svg",
+          "angry": "characters/naruto/portrait/angry.svg",
+          "determined": "characters/naruto/portrait/determined.svg",
+          "sad": "characters/naruto/portrait/sad.svg",
+          "shock": "characters/naruto/portrait/shock.svg",
+          "scared": "characters/naruto/portrait/scared.svg",
+          "smug": "characters/naruto/portrait/smug.svg",
+          "closed": "characters/naruto/portrait/closed.svg"
+        },
+        "walk": {
+          "down-0": "characters/naruto/walk/down-0.svg",
+          "down-1": "characters/naruto/walk/down-1.svg",
+          "down-2": "characters/naruto/walk/down-2.svg",
+          "up-0": "characters/naruto/walk/up-0.svg",
+          "up-1": "characters/naruto/walk/up-1.svg",
+          "up-2": "characters/naruto/walk/up-2.svg",
+          "left-0": "characters/naruto/walk/left-0.svg",
+          "left-1": "characters/naruto/walk/left-1.svg",
+          "left-2": "characters/naruto/walk/left-2.svg",
+          "right-0": "characters/naruto/walk/right-0.svg",
+          "right-1": "characters/naruto/walk/right-1.svg",
+          "right-2": "characters/naruto/walk/right-2.svg"
+        },
+        "face": "characters/naruto/face.svg",
+        "battle": "characters/naruto/battle.svg"
+      }
+    },
+    "sasuke": {
+      "default": {
+        "portrait": {
+          "neutral": "characters/sasuke/portrait/neutral.svg",
+          "happy": "characters/sasuke/portrait/happy.svg",
+          "laugh": "characters/sasuke/portrait/laugh.svg",
+          "angry": "characters/sasuke/portrait/angry.svg",
+          "determined": "characters/sasuke/portrait/determined.svg",
+          "sad": "characters/sasuke/portrait/sad.svg",
+          "shock": "characters/sasuke/portrait/shock.svg",
+          "scared": "characters/sasuke/portrait/scared.svg",
+          "smug": "characters/sasuke/portrait/smug.svg",
+          "closed": "characters/sasuke/portrait/closed.svg"
+        },
+        "walk": {
+          "down-0": "characters/sasuke/walk/down-0.svg",
+          "down-1": "characters/sasuke/walk/down-1.svg",
+          "down-2": "characters/sasuke/walk/down-2.svg",
+          "up-0": "characters/sasuke/walk/up-0.svg",
+          "up-1": "characters/sasuke/walk/up-1.svg",
+          "up-2": "characters/sasuke/walk/up-2.svg",
+          "left-0": "characters/sasuke/walk/left-0.svg",
+          "left-1": "characters/sasuke/walk/left-1.svg",
+          "left-2": "characters/sasuke/walk/left-2.svg",
+          "right-0": "characters/sasuke/walk/right-0.svg",
+          "right-1": "characters/sasuke/walk/right-1.svg",
+          "right-2": "characters/sasuke/walk/right-2.svg"
+        },
+        "face": "characters/sasuke/face.svg",
+        "battle": "characters/sasuke/battle.svg"
+      }
+    },
+    "sakura": {
+      "default": {
+        "portrait": {
+          "neutral": "characters/sakura/portrait/neutral.svg",
+          "happy": "characters/sakura/portrait/happy.svg",
+          "laugh": "characters/sakura/portrait/laugh.svg",
+          "angry": "characters/sakura/portrait/angry.svg",
+          "determined": "characters/sakura/portrait/determined.svg",
+          "sad": "characters/sakura/portrait/sad.svg",
+          "shock": "characters/sakura/portrait/shock.svg",
+          "scared": "characters/sakura/portrait/scared.svg",
+          "smug": "characters/sakura/portrait/smug.svg",
+          "closed": "characters/sakura/portrait/closed.svg"
+        },
+        "walk": {
+          "down-0": "characters/sakura/walk/down-0.svg",
+          "down-1": "characters/sakura/walk/down-1.svg",
+          "down-2": "characters/sakura/walk/down-2.svg",
+          "up-0": "characters/sakura/walk/up-0.svg",
+          "up-1": "characters/sakura/walk/up-1.svg",
+          "up-2": "characters/sakura/walk/up-2.svg",
+          "left-0": "characters/sakura/walk/left-0.svg",
+          "left-1": "characters/sakura/walk/left-1.svg",
+          "left-2": "characters/sakura/walk/left-2.svg",
+          "right-0": "characters/sakura/walk/right-0.svg",
+          "right-1": "characters/sakura/walk/right-1.svg",
+          "right-2": "characters/sakura/walk/right-2.svg"
+        },
+        "face": "characters/sakura/face.svg",
+        "battle": "characters/sakura/battle.svg"
+      }
+    },
+    "kakashi": {
+      "default": {
+        "portrait": {
+          "neutral": "characters/kakashi/portrait/neutral.svg",
+          "happy": "characters/kakashi/portrait/happy.svg",
+          "laugh": "characters/kakashi/portrait/laugh.svg",
+          "angry": "characters/kakashi/portrait/angry.svg",
+          "determined": "characters/kakashi/portrait/determined.svg",
+          "sad": "characters/kakashi/portrait/sad.svg",
+          "shock": "characters/kakashi/portrait/shock.svg",
+          "scared": "characters/kakashi/portrait/scared.svg",
+          "smug": "characters/kakashi/portrait/smug.svg",
+          "closed": "characters/kakashi/portrait/closed.svg"
+        },
+        "walk": {
+          "down-0": "characters/kakashi/walk/down-0.svg",
+          "down-1": "characters/kakashi/walk/down-1.svg",
+          "down-2": "characters/kakashi/walk/down-2.svg",
+          "up-0": "characters/kakashi/walk/up-0.svg",
+          "up-1": "characters/kakashi/walk/up-1.svg",
+          "up-2": "characters/kakashi/walk/up-2.svg",
+          "left-0": "characters/kakashi/walk/left-0.svg",
+          "left-1": "characters/kakashi/walk/left-1.svg",
+          "left-2": "characters/kakashi/walk/left-2.svg",
+          "right-0": "characters/kakashi/walk/right-0.svg",
+          "right-1": "characters/kakashi/walk/right-1.svg",
+          "right-2": "characters/kakashi/walk/right-2.svg"
+        },
+        "face": "characters/kakashi/face.svg",
+        "battle": "characters/kakashi/battle.svg"
+      }
+    },
+    "kaede": {
+      "default": {
+        "portrait": {
+          "neutral": "characters/kaede/portrait/neutral.svg",
+          "happy": "characters/kaede/portrait/happy.svg",
+          "laugh": "characters/kaede/portrait/laugh.svg",
+          "angry": "characters/kaede/portrait/angry.svg",
+          "determined": "characters/kaede/portrait/determined.svg",
+          "sad": "characters/kaede/portrait/sad.svg",
+          "shock": "characters/kaede/portrait/shock.svg",
+          "scared": "characters/kaede/portrait/scared.svg",
+          "smug": "characters/kaede/portrait/smug.svg",
+          "closed": "characters/kaede/portrait/closed.svg"
+        },
+        "walk": {
+          "down-0": "characters/kaede/walk/down-0.svg",
+          "down-1": "characters/kaede/walk/down-1.svg",
+          "down-2": "characters/kaede/walk/down-2.svg",
+          "up-0": "characters/kaede/walk/up-0.svg",
+          "up-1": "characters/kaede/walk/up-1.svg",
+          "up-2": "characters/kaede/walk/up-2.svg",
+          "left-0": "characters/kaede/walk/left-0.svg",
+          "left-1": "characters/kaede/walk/left-1.svg",
+          "left-2": "characters/kaede/walk/left-2.svg",
+          "right-0": "characters/kaede/walk/right-0.svg",
+          "right-1": "characters/kaede/walk/right-1.svg",
+          "right-2": "characters/kaede/walk/right-2.svg"
+        },
+        "face": "characters/kaede/face.svg",
+        "battle": "characters/kaede/battle.svg"
+      }
+    },
+    "jin": {
+      "default": {
+        "portrait": {
+          "neutral": "characters/jin/portrait/neutral.svg",
+          "happy": "characters/jin/portrait/happy.svg",
+          "laugh": "characters/jin/portrait/laugh.svg",
+          "angry": "characters/jin/portrait/angry.svg",
+          "determined": "characters/jin/portrait/determined.svg",
+          "sad": "characters/jin/portrait/sad.svg",
+          "shock": "characters/jin/portrait/shock.svg",
+          "scared": "characters/jin/portrait/scared.svg",
+          "smug": "characters/jin/portrait/smug.svg",
+          "closed": "characters/jin/portrait/closed.svg"
+        },
+        "walk": {
+          "down-0": "characters/jin/walk/down-0.svg",
+          "down-1": "characters/jin/walk/down-1.svg",
+          "down-2": "characters/jin/walk/down-2.svg",
+          "up-0": "characters/jin/walk/up-0.svg",
+          "up-1": "characters/jin/walk/up-1.svg",
+          "up-2": "characters/jin/walk/up-2.svg",
+          "left-0": "characters/jin/walk/left-0.svg",
+          "left-1": "characters/jin/walk/left-1.svg",
+          "left-2": "characters/jin/walk/left-2.svg",
+          "right-0": "characters/jin/walk/right-0.svg",
+          "right-1": "characters/jin/walk/right-1.svg",
+          "right-2": "characters/jin/walk/right-2.svg"
+        },
+        "face": "characters/jin/face.svg",
+        "battle": "characters/jin/battle.svg"
+      }
+    }
+  },
+  "cast": {
+    "hokage": {
+      "portrait": {
+        "neutral": "cast/hokage/portrait/neutral.svg",
+        "happy": "cast/hokage/portrait/happy.svg",
+        "laugh": "cast/hokage/portrait/laugh.svg",
+        "angry": "cast/hokage/portrait/angry.svg",
+        "determined": "cast/hokage/portrait/determined.svg",
+        "sad": "cast/hokage/portrait/sad.svg",
+        "shock": "cast/hokage/portrait/shock.svg",
+        "scared": "cast/hokage/portrait/scared.svg",
+        "smug": "cast/hokage/portrait/smug.svg",
+        "closed": "cast/hokage/portrait/closed.svg"
+      },
+      "face": "cast/hokage/face.svg"
+    },
+    "iruka": {
+      "portrait": {
+        "neutral": "cast/iruka/portrait/neutral.svg",
+        "happy": "cast/iruka/portrait/happy.svg",
+        "laugh": "cast/iruka/portrait/laugh.svg",
+        "angry": "cast/iruka/portrait/angry.svg",
+        "determined": "cast/iruka/portrait/determined.svg",
+        "sad": "cast/iruka/portrait/sad.svg",
+        "shock": "cast/iruka/portrait/shock.svg",
+        "scared": "cast/iruka/portrait/scared.svg",
+        "smug": "cast/iruka/portrait/smug.svg",
+        "closed": "cast/iruka/portrait/closed.svg"
+      },
+      "face": "cast/iruka/face.svg"
+    },
+    "villager": {
+      "portrait": {
+        "neutral": "cast/villager/portrait/neutral.svg",
+        "happy": "cast/villager/portrait/happy.svg",
+        "laugh": "cast/villager/portrait/laugh.svg",
+        "angry": "cast/villager/portrait/angry.svg",
+        "determined": "cast/villager/portrait/determined.svg",
+        "sad": "cast/villager/portrait/sad.svg",
+        "shock": "cast/villager/portrait/shock.svg",
+        "scared": "cast/villager/portrait/scared.svg",
+        "smug": "cast/villager/portrait/smug.svg",
+        "closed": "cast/villager/portrait/closed.svg"
+      },
+      "face": "cast/villager/face.svg"
+    },
+    "oldMan": {
+      "portrait": {
+        "neutral": "cast/oldMan/portrait/neutral.svg",
+        "happy": "cast/oldMan/portrait/happy.svg",
+        "laugh": "cast/oldMan/portrait/laugh.svg",
+        "angry": "cast/oldMan/portrait/angry.svg",
+        "determined": "cast/oldMan/portrait/determined.svg",
+        "sad": "cast/oldMan/portrait/sad.svg",
+        "shock": "cast/oldMan/portrait/shock.svg",
+        "scared": "cast/oldMan/portrait/scared.svg",
+        "smug": "cast/oldMan/portrait/smug.svg",
+        "closed": "cast/oldMan/portrait/closed.svg"
+      },
+      "face": "cast/oldMan/face.svg"
+    },
+    "merchant": {
+      "portrait": {
+        "neutral": "cast/merchant/portrait/neutral.svg",
+        "happy": "cast/merchant/portrait/happy.svg",
+        "laugh": "cast/merchant/portrait/laugh.svg",
+        "angry": "cast/merchant/portrait/angry.svg",
+        "determined": "cast/merchant/portrait/determined.svg",
+        "sad": "cast/merchant/portrait/sad.svg",
+        "shock": "cast/merchant/portrait/shock.svg",
+        "scared": "cast/merchant/portrait/scared.svg",
+        "smug": "cast/merchant/portrait/smug.svg",
+        "closed": "cast/merchant/portrait/closed.svg"
+      },
+      "face": "cast/merchant/face.svg"
+    },
+    "proctor": {
+      "portrait": {
+        "neutral": "cast/proctor/portrait/neutral.svg",
+        "happy": "cast/proctor/portrait/happy.svg",
+        "laugh": "cast/proctor/portrait/laugh.svg",
+        "angry": "cast/proctor/portrait/angry.svg",
+        "determined": "cast/proctor/portrait/determined.svg",
+        "sad": "cast/proctor/portrait/sad.svg",
+        "shock": "cast/proctor/portrait/shock.svg",
+        "scared": "cast/proctor/portrait/scared.svg",
+        "smug": "cast/proctor/portrait/smug.svg",
+        "closed": "cast/proctor/portrait/closed.svg"
+      },
+      "face": "cast/proctor/face.svg"
+    },
+    "anbu": {
+      "portrait": {
+        "neutral": "cast/anbu/portrait/neutral.svg",
+        "happy": "cast/anbu/portrait/happy.svg",
+        "laugh": "cast/anbu/portrait/laugh.svg",
+        "angry": "cast/anbu/portrait/angry.svg",
+        "determined": "cast/anbu/portrait/determined.svg",
+        "sad": "cast/anbu/portrait/sad.svg",
+        "shock": "cast/anbu/portrait/shock.svg",
+        "scared": "cast/anbu/portrait/scared.svg",
+        "smug": "cast/anbu/portrait/smug.svg",
+        "closed": "cast/anbu/portrait/closed.svg"
+      },
+      "face": "cast/anbu/face.svg"
+    }
+  },
+  "enemies": {
+    "dummy": {
+      "battle": "enemies/dummy/battle.svg"
+    },
+    "academyRival": {
+      "battle": "enemies/academyRival/battle.svg",
+      "portrait": {
+        "neutral": "enemies/academyRival/portrait/neutral.svg",
+        "angry": "enemies/academyRival/portrait/angry.svg",
+        "smug": "enemies/academyRival/portrait/smug.svg",
+        "sad": "enemies/academyRival/portrait/sad.svg",
+        "shock": "enemies/academyRival/portrait/shock.svg"
+      }
+    },
+    "banditThug": {
+      "battle": "enemies/banditThug/battle.svg",
+      "portrait": {
+        "neutral": "enemies/banditThug/portrait/neutral.svg",
+        "angry": "enemies/banditThug/portrait/angry.svg",
+        "smug": "enemies/banditThug/portrait/smug.svg",
+        "sad": "enemies/banditThug/portrait/sad.svg",
+        "shock": "enemies/banditThug/portrait/shock.svg"
+      }
+    },
+    "banditArcher": {
+      "battle": "enemies/banditArcher/battle.svg",
+      "portrait": {
+        "neutral": "enemies/banditArcher/portrait/neutral.svg",
+        "angry": "enemies/banditArcher/portrait/angry.svg",
+        "smug": "enemies/banditArcher/portrait/smug.svg",
+        "sad": "enemies/banditArcher/portrait/sad.svg",
+        "shock": "enemies/banditArcher/portrait/shock.svg"
+      }
+    },
+    "forestWolf": {
+      "battle": "enemies/forestWolf/battle.svg"
+    },
+    "roguePupil": {
+      "battle": "enemies/roguePupil/battle.svg",
+      "portrait": {
+        "neutral": "enemies/roguePupil/portrait/neutral.svg",
+        "angry": "enemies/roguePupil/portrait/angry.svg",
+        "smug": "enemies/roguePupil/portrait/smug.svg",
+        "sad": "enemies/roguePupil/portrait/sad.svg",
+        "shock": "enemies/roguePupil/portrait/shock.svg"
+      }
+    },
+    "swampPuppet": {
+      "battle": "enemies/swampPuppet/battle.svg"
+    },
+    "soundGenin": {
+      "battle": "enemies/soundGenin/battle.svg",
+      "portrait": {
+        "neutral": "enemies/soundGenin/portrait/neutral.svg",
+        "angry": "enemies/soundGenin/portrait/angry.svg",
+        "smug": "enemies/soundGenin/portrait/smug.svg",
+        "sad": "enemies/soundGenin/portrait/sad.svg",
+        "shock": "enemies/soundGenin/portrait/shock.svg"
+      }
+    },
+    "mistAssassin": {
+      "battle": "enemies/mistAssassin/battle.svg",
+      "portrait": {
+        "neutral": "enemies/mistAssassin/portrait/neutral.svg",
+        "angry": "enemies/mistAssassin/portrait/angry.svg",
+        "smug": "enemies/mistAssassin/portrait/smug.svg",
+        "sad": "enemies/mistAssassin/portrait/sad.svg",
+        "shock": "enemies/mistAssassin/portrait/shock.svg"
+      }
+    },
+    "shadowAcolyte": {
+      "battle": "enemies/shadowAcolyte/battle.svg",
+      "portrait": {
+        "neutral": "enemies/shadowAcolyte/portrait/neutral.svg",
+        "angry": "enemies/shadowAcolyte/portrait/angry.svg",
+        "smug": "enemies/shadowAcolyte/portrait/smug.svg",
+        "sad": "enemies/shadowAcolyte/portrait/sad.svg",
+        "shock": "enemies/shadowAcolyte/portrait/shock.svg"
+      }
+    },
+    "shadowBrute": {
+      "battle": "enemies/shadowBrute/battle.svg",
+      "portrait": {
+        "neutral": "enemies/shadowBrute/portrait/neutral.svg",
+        "angry": "enemies/shadowBrute/portrait/angry.svg",
+        "smug": "enemies/shadowBrute/portrait/smug.svg",
+        "sad": "enemies/shadowBrute/portrait/sad.svg",
+        "shock": "enemies/shadowBrute/portrait/shock.svg"
+      }
+    },
+    "karasu": {
+      "battle": "enemies/karasu/battle.svg",
+      "portrait": {
+        "neutral": "enemies/karasu/portrait/neutral.svg",
+        "angry": "enemies/karasu/portrait/angry.svg",
+        "smug": "enemies/karasu/portrait/smug.svg",
+        "sad": "enemies/karasu/portrait/sad.svg",
+        "shock": "enemies/karasu/portrait/shock.svg"
+      }
+    },
+    "ryujin": {
+      "battle": "enemies/ryujin/battle.svg",
+      "portrait": {
+        "neutral": "enemies/ryujin/portrait/neutral.svg",
+        "angry": "enemies/ryujin/portrait/angry.svg",
+        "smug": "enemies/ryujin/portrait/smug.svg",
+        "sad": "enemies/ryujin/portrait/sad.svg",
+        "shock": "enemies/ryujin/portrait/shock.svg"
+      }
+    },
+    "jinRival": {
+      "battle": "enemies/jinRival/battle.svg",
+      "portrait": {
+        "neutral": "enemies/jinRival/portrait/neutral.svg",
+        "angry": "enemies/jinRival/portrait/angry.svg",
+        "smug": "enemies/jinRival/portrait/smug.svg",
+        "sad": "enemies/jinRival/portrait/sad.svg",
+        "shock": "enemies/jinRival/portrait/shock.svg"
+      }
+    },
+    "kagemasaP1": {
+      "battle": "enemies/kagemasaP1/battle.svg",
+      "portrait": {
+        "neutral": "enemies/kagemasaP1/portrait/neutral.svg",
+        "angry": "enemies/kagemasaP1/portrait/angry.svg",
+        "smug": "enemies/kagemasaP1/portrait/smug.svg",
+        "sad": "enemies/kagemasaP1/portrait/sad.svg",
+        "shock": "enemies/kagemasaP1/portrait/shock.svg"
+      }
+    },
+    "kagemasaP2": {
+      "battle": "enemies/kagemasaP2/battle.svg",
+      "portrait": {
+        "neutral": "enemies/kagemasaP2/portrait/neutral.svg",
+        "angry": "enemies/kagemasaP2/portrait/angry.svg",
+        "smug": "enemies/kagemasaP2/portrait/smug.svg",
+        "sad": "enemies/kagemasaP2/portrait/sad.svg",
+        "shock": "enemies/kagemasaP2/portrait/shock.svg"
+      }
+    },
+    "kakashiSpar": {
+      "battle": "enemies/kakashiSpar/battle.svg",
+      "portrait": {
+        "neutral": "enemies/kakashiSpar/portrait/neutral.svg",
+        "angry": "enemies/kakashiSpar/portrait/angry.svg",
+        "smug": "enemies/kakashiSpar/portrait/smug.svg",
+        "sad": "enemies/kakashiSpar/portrait/sad.svg",
+        "shock": "enemies/kakashiSpar/portrait/shock.svg"
+      }
+    }
+  },
+  "backgrounds": {
+    "village": "backgrounds/village.svg",
+    "villageNight": "backgrounds/villageNight.svg",
+    "academy": "backgrounds/academy.svg",
+    "trainingField": "backgrounds/trainingField.svg",
+    "forest": "backgrounds/forest.svg",
+    "deepForest": "backgrounds/deepForest.svg",
+    "bridge": "backgrounds/bridge.svg",
+    "coast": "backgrounds/coast.svg",
+    "cave": "backgrounds/cave.svg",
+    "swamp": "backgrounds/swamp.svg",
+    "arena": "backgrounds/arena.svg",
+    "ruins": "backgrounds/ruins.svg",
+    "ruinsNight": "backgrounds/ruinsNight.svg",
+    "eclipse": "backgrounds/eclipse.svg",
+    "hokageOffice": "backgrounds/hokageOffice.svg",
+    "ichiraku": "backgrounds/ichiraku.svg",
+    "rooftopNight": "backgrounds/rooftopNight.svg",
+    "gate": "backgrounds/gate.svg",
+    "memorial": "backgrounds/memorial.svg",
+    "title": "backgrounds/title.svg",
+    "konoha": "backgrounds/konoha.svg",
+    "forestNight": "backgrounds/forestNight.svg",
+    "wave": "backgrounds/wave.svg"
+  }
+}

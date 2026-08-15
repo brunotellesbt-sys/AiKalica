@@ -1,0 +1,19 @@
+<svg viewBox="0 0 1200 675" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs><linearGradient id="bgc8" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#3a2f28"/><stop offset="100%" stop-color="#241d18"/>
+  </linearGradient></defs>
+      <rect width="1200" height="675" fill="url(#bgc8)"/>
+      <rect x="0" y="0" width="1200" height="140" fill="#4a3a2c"/>
+      <rect x="0" y="130" width="1200" height="14" fill="#6a5440"/>
+      <rect x="120" y="170" width="420" height="300" rx="6" fill="#9fd0e8"/>
+      <rect x="120" y="170" width="420" height="300" rx="6" fill="none" stroke="#6a5440" stroke-width="12"/>
+      <path d="M 330 170 L 330 470 M 120 320 L 540 320" stroke="#6a5440" stroke-width="10"/>
+      <rect x="700" y="150" width="360" height="260" fill="#c9a05a" stroke="#7a5a34" stroke-width="6"/>
+      <text x="880" y="300" font-size="120" text-anchor="middle" fill="#7a3a2a" font-family="Georgia,serif">火</text>
+      <rect x="0" y="470" width="1200" height="205" fill="#6a5440"/>
+      <rect x="0" y="470" width="1200" height="16" fill="#856a50"/>
+      <rect x="380" y="520" width="440" height="120" rx="8" fill="#4a3a2c" stroke="#2f2419" stroke-width="4"/>
+      <rect x="420" y="500" width="120" height="26" rx="4" fill="#e6dcc0"/>
+      <rect x="640" y="504" width="90" height="22" rx="4" fill="#e6dcc0"/>
+    
+  </svg>

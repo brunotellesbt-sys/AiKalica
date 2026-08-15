@@ -1,0 +1,22 @@
+<svg viewBox="0 0 1200 675" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs><linearGradient id="bgc2" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#20181f"/><stop offset="100%" stop-color="#0c0910"/>
+  </linearGradient></defs>
+      <rect width="1200" height="675" fill="url(#bgc2)"/>
+      <path d="M 0 0 L 0 180 Q 200 300 420 250 Q 600 210 800 268 Q 1000 320 1200 200 L 1200 0 Z" fill="#241c26"/>
+      <g fill="#2c2330">
+        <path d="M 140 180 L 178 320 L 216 180 Z"/><path d="M 420 240 L 452 380 L 486 240 Z"/>
+        <path d="M 760 262 L 792 400 L 826 262 Z"/><path d="M 1020 210 L 1046 330 L 1076 210 Z"/>
+      </g>
+      <rect x="0" y="500" width="1200" height="175" fill="#1a1420"/>
+      <path d="M 0 500 Q 300 470 600 502 Q 900 534 1200 496 L 1200 560 L 0 560 Z" fill="#2a2130"/>
+      <g fill="#2c2330">
+        <path d="M 220 500 L 250 400 L 280 500 Z"/><path d="M 640 502 L 672 392 L 704 502 Z"/>
+        <path d="M 980 498 L 1006 420 L 1034 498 Z"/>
+      </g>
+      <circle cx="300" cy="330" r="7" fill="#6fd8e8" opacity=".9"/>
+      <circle cx="300" cy="330" r="34" fill="#6fd8e8" opacity=".12"/>
+      <circle cx="880" cy="420" r="6" fill="#6fd8e8" opacity=".8"/>
+      <circle cx="880" cy="420" r="30" fill="#6fd8e8" opacity=".1"/>
+    
+  </svg>

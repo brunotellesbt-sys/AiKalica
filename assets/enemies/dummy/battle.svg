@@ -1,0 +1,15 @@
+<svg viewBox="0 0 120 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="boneco"
+      >
+    <ellipse cx="60" cy="163" rx="26" ry="6" fill="#000" opacity=".38"/>
+    <rect x="52" y="120" width="16" height="40" fill="#5b4630"/>
+    <rect x="40" y="152" width="40" height="9" rx="3" fill="#493826"/>
+    <rect x="18" y="86" width="84" height="12" rx="5" fill="#5b4630"/>
+    <ellipse cx="60" cy="98" rx="30" ry="30" fill="#8a6d4a" stroke="#53412c" stroke-width="2"/>
+    <path d="M 34 84 Q 60 76 86 84 M 32 98 Q 60 92 88 98 M 34 112 Q 60 118 86 112"
+          stroke="#614c34" stroke-width="2.5" fill="none"/>
+    <circle cx="60" cy="98" r="12" fill="none" stroke="#d4462f" stroke-width="3"/>
+    <circle cx="60" cy="98" r="4" fill="#d4462f"/>
+    <ellipse cx="60" cy="52" rx="20" ry="22" fill="#8a6d4a" stroke="#53412c" stroke-width="2"/>
+    <path d="M 50 48 L 58 48 M 62 48 L 70 48" stroke="#2a2230" stroke-width="3" stroke-linecap="round"/>
+    <path d="M 52 62 Q 60 58 68 62" stroke="#2a2230" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+  </svg>

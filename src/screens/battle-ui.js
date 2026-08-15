@@ -3,8 +3,7 @@
 import { el, svgNode, clear, wait, mount, flash, shake, toast, modal } from '../core/ui.js';
 import { sfx, music } from '../core/audio.js';
 import { settings } from '../core/save.js';
-import { sprite } from '../art/sprites.js';
-import { background } from '../art/backgrounds.js';
+import { battleNode, backgroundNode } from '../art/assets.js';
 import { JUTSU } from '../data/jutsu.js';
 import { ITEMS } from '../data/items.js';
 import { ELEMENTS } from '../data/characters.js';
@@ -28,7 +27,7 @@ const speed = () => (settings.battleAnim ? 1 : 0.35);
 function unitNode(u) {
   const node = el('div.unit', { dataset: { uid: u.uid } });
   const spr = el('div.unit-sprite');
-  spr.append(svgNode(sprite(u.art || {}, { flip: u.side === 'foe' })));
+  spr.append(battleNode(u.id, { art: u.art, element: u.rec?.element, flip: u.side === 'foe' }));
 
   const plate = el('div.unit-plate', {}, [
     el('div.nm', {}, [
@@ -116,7 +115,7 @@ export async function runBattle(config) {
   // ---- DOM ----
   const root = el('div.battle');
   const bg = el('div.battle-bg');
-  bg.append(svgNode(background(config.bg || 'forest')));
+  bg.append(backgroundNode(config.bg || 'forest'));
 
   const willBar = el('div.bar.will', {}, [el('i', { style: { width: '0%' } })]);
   const willMeter = el('div.will-meter', {}, [

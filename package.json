@@ -6,9 +6,16 @@
   "scripts": {
     "start": "python3 -m http.server 8080",
     "dev": "python3 -m http.server 8080",
-    "test": "node tests/smoke.test.mjs"
+    "test": "node tests/smoke.test.mjs",
+    "build:assets": "node tools/build-assets.mjs --clean"
   },
-  "keywords": ["rpg", "visual-novel", "turn-based", "ninja", "fangame"],
+  "keywords": [
+    "rpg",
+    "visual-novel",
+    "turn-based",
+    "ninja",
+    "fangame"
+  ],
   "license": "MIT",
   "private": true
 }

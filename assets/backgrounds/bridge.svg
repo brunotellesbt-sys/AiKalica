@@ -1,0 +1,32 @@
+<svg viewBox="0 0 1200 675" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs><linearGradient id="bgc0" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#b8d8e8"/><stop offset="100%" stop-color="#e8dcc0"/>
+  </linearGradient><linearGradient id="bgc0w" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#6fa8c4"/><stop offset="100%" stop-color="#3f6f8a"/>
+  </linearGradient></defs>
+      <rect width="1200" height="675" fill="url(#bgc0)"/>
+      <ellipse cx="360" cy="300" rx="520" ry="70" fill="#dfe8ee" opacity="0.55"/>
+          <ellipse cx="900" cy="340" rx="470" ry="60" fill="#dfe8ee" opacity="0.44000000000000006"/>
+      <path d="M -50 675 L -50 330 L 80 211 L 210 327 L 340 227 L 470 325 L 600 195 L 730 314 L 860 187 L 990 320 L 1120 202 L 1250 319 L 1380 203 L 1510 316 L 1300 675 Z" fill="#94a8b8"/>
+      <rect x="0" y="400" width="1200" height="275" fill="url(#bgc0w)"/>
+      <g opacity=".35" stroke="#cfe4ef" stroke-width="3" fill="none">
+        <path d="M 0 470 Q 150 460 300 470 Q 450 480 600 470"/>
+        <path d="M 400 540 Q 550 530 700 540 Q 850 550 1000 540"/>
+        <path d="M 100 610 Q 250 600 400 610 Q 550 620 700 610"/>
+      </g>
+      <rect x="0" y="380" width="1200" height="46" fill="#9a7a52"/>
+      <rect x="0" y="374" width="1200" height="10" fill="#b89a6a"/>
+      <g fill="#7a5a3a">
+        <rect x="120" y="426" width="24" height="250"/>
+        <rect x="480" y="426" width="24" height="250"/>
+        <rect x="840" y="426" width="24" height="250"/>
+      </g>
+      <g stroke="#8a6a44" stroke-width="9" fill="none">
+        <path d="M 0 320 L 1200 320"/>
+      </g>
+      <g fill="#8a6a44">
+        <rect x="60" y="320" width="14" height="60"/><rect x="300" y="320" width="14" height="60"/>
+        <rect x="620" y="320" width="14" height="60"/><rect x="940" y="320" width="14" height="60"/>
+      </g>
+    
+  </svg>

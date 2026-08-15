@@ -2,6 +2,7 @@
 // Execute com: npm test
 
 import assert from 'node:assert/strict';
+import { existsSync, readFileSync } from 'node:fs';
 
 import { CHARACTERS, HERO_JUTSU, STYLE_JUTSU, ELEMENTS, elementMultiplier } from '../src/data/characters.js';
 import { JUTSU, TEAM_JUTSU } from '../src/data/jutsu.js';
@@ -20,6 +21,10 @@ import {
 import { applyStatus } from '../src/systems/effects.js';
 import { newGame, state, recruit, addItem, itemCount, addBond, bond, karmaBalance } from '../src/core/state.js';
 import { setSeed } from '../src/core/rng.js';
+import { EXTRA_CAST } from '../src/data/story/cast.js';
+import { EMOTIONS, canonicalEmotion } from '../src/art/emotions.js';
+import { portraitUrl, walkUrl, battleUrl, backgroundUrl } from '../src/art/assets.js';
+import { BACKGROUND_IDS } from '../src/art/backgrounds.js';
 
 let passed = 0;
 let failed = 0;
@@ -302,6 +307,102 @@ test('todo capítulo termina abrindo um Intervalo', () => {
   };
   for (const sc of Object.values(SCENES)) walk(sc.nodes);
   assert.ok(hubs >= 4, `esperado ao menos 4 Intervalos na história, achei ${hubs}`);
+});
+
+// =========================================================== assets =========
+section('Arquivos de arte');
+
+const hasAssets = existsSync('assets/manifest.json');
+const manifest = hasAssets ? JSON.parse(readFileSync('assets/manifest.json', 'utf8')) : null;
+
+test('assets/ foi gerado', () => {
+  assert.ok(hasAssets, 'rode `npm run build:assets` antes dos testes');
+  assert.ok(Object.keys(manifest.characters).length >= 7, 'faltam personagens no manifesto');
+});
+
+test('todo personagem tem retrato, rosto, sprite e caminhada', () => {
+  for (const id of Object.keys(CHARACTERS)) {
+    const variants = manifest.characters[id];
+    assert.ok(variants, `${id} ausente do manifesto`);
+    for (const v of Object.values(variants)) {
+      assert.ok(v.face && v.battle, `${id} sem rosto ou sprite de combate`);
+      for (const emo of EMOTIONS) assert.ok(v.portrait[emo], `${id} sem retrato "${emo}"`);
+      for (const dir of ['down', 'up', 'left', 'right']) {
+        for (let f = 0; f < 3; f++) {
+          assert.ok(v.walk[`${dir}-${f}`], `${id} sem quadro de caminhada ${dir}-${f}`);
+        }
+      }
+    }
+  }
+});
+
+test('figurantes que falam também têm retrato em disco', () => {
+  // Regressão: os figurantes ficaram de fora do gerador e todo diálogo com
+  // eles caía no procedural, enchendo o console de 404.
+  for (const [id, def] of Object.entries(EXTRA_CAST)) {
+    if (!def.art) continue;
+    assert.ok(manifest.cast?.[id], `figurante "${id}" ausente do manifesto`);
+    for (const emo of EMOTIONS) {
+      assert.ok(manifest.cast[id].portrait[emo], `figurante "${id}" sem retrato "${emo}"`);
+    }
+  }
+});
+
+test('toda expressão usada no roteiro existe como arquivo', () => {
+  // Regressão: o roteiro usa apelidos ("smirk"), que precisam ser normalizados
+  // para uma expressão que o gerador de fato produziu.
+  const used = new Set();
+  const walkNodes = (nodes) => {
+    for (const n of nodes || []) {
+      if (!n || typeof n !== 'object') continue;
+      if (n.t === 'say' && n.emo) used.add(n.emo);
+      if (n.t === 'choice') for (const o of n.options || []) walkNodes(o.then);
+      if (n.t === 'if') { walkNodes(n.then); walkNodes(n.else); }
+      if (n.t === 'battle') walkNodes(n.then);
+    }
+  };
+  for (const sc of Object.values(SCENES)) walkNodes(sc.nodes);
+  for (const sc of allBondScenes()) walkNodes(sc.nodes);
+
+  assert.ok(used.size > 5, 'o roteiro deveria usar várias expressões');
+  for (const emo of used) {
+    const canon = canonicalEmotion(emo);
+    assert.ok(EMOTIONS.includes(canon), `expressão "${emo}" não normaliza para nada válido`);
+    assert.ok(existsSync(`assets/characters/naruto/portrait/${canon}.svg`),
+      `expressão "${emo}" (→ ${canon}) não tem arquivo`);
+  }
+});
+
+test('as URLs que o jogo pede apontam para arquivos que existem', () => {
+  // Cruza o carregador com o disco: pega exatamente o caminho que o jogo
+  // usaria em tempo de execução e confere se o arquivo está lá.
+  const checks = [
+    portraitUrl('naruto', 'smirk'),          // apelido
+    portraitUrl('hero', 'happy', 'fire'),    // variante elemental do herói
+    portraitUrl('iruka', 'sad'),             // figurante
+    portraitUrl('karasu', 'angry'),          // chefe humanoide
+    battleUrl('sakura'),
+    battleUrl('forestWolf'),
+    walkUrl('hero', 'left', 2, 'water'),
+    walkUrl('jin', 'up', 0),
+    backgroundUrl('konoha'),
+  ];
+  for (const url of checks) {
+    assert.ok(existsSync(url), `o jogo pediria "${url}", que não existe em disco`);
+  }
+});
+
+test('todo cenário usado pelo roteiro tem arquivo', () => {
+  const used = new Set();
+  for (const sc of Object.values(SCENES)) {
+    if (sc.bg) used.add(sc.bg);
+    for (const n of sc.nodes) if (n?.t === 'bg') used.add(n.id);
+    for (const n of sc.nodes) if (n?.t === 'battle' && n.bg) used.add(n.bg);
+  }
+  for (const bg of used) {
+    assert.ok(BACKGROUND_IDS.includes(bg), `cenário "${bg}" não existe no gerador`);
+    assert.ok(existsSync(backgroundUrl(bg)), `cenário "${bg}" sem arquivo`);
+  }
 });
 
 // ======================================================== progressão ========

@@ -1,0 +1,55 @@
+<svg viewBox="0 0 120 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="lutador"
+      >
+    <defs>
+      <radialGradient id="sbis" cx="40%" cy="30%" r="70%">
+        <stop offset="0%" stop-color="#a69cb2"/><stop offset="100%" stop-color="#81778d"/>
+      </radialGradient>
+      <radialGradient id="sbia" cx="50%" cy="42%" r="55%">
+        <stop offset="55%" stop-color="rgba(138,74,232,0)"/><stop offset="100%" stop-color="rgba(138,74,232,0.6)"/>
+      </radialGradient>
+    </defs>
+
+    <ellipse cx="60" cy="163" rx="30" ry="6" fill="#000" opacity=".38"/>
+    <rect width="120" height="170" fill="url(#sbia)"/>
+
+    <g>
+      <animateTransform attributeName="transform" type="translate"
+        values="0 0; 0 -2.5; 0 0" dur="2.6s" repeatCount="indefinite"/>
+
+      <!-- pernas -->
+      <rect x="44" y="126" width="13" height="30" rx="6" fill="#b884e8"/>
+      <rect x="63" y="126" width="13" height="30" rx="6" fill="#b884e8"/>
+      <rect x="42" y="150" width="17" height="10" rx="4" fill="#2b2430"/>
+      <rect x="61" y="150" width="17" height="10" rx="4" fill="#2b2430"/>
+
+      <!-- tronco -->
+      <path d="M 38 92 Q 60 84 82 92 L 86 132 Q 60 140 34 132 Z"
+            fill="#0f0c16" stroke="#09070d" stroke-width="2"/>
+      <path d="M 60 86 L 60 136" stroke="#0b0910" stroke-width="2.5"/>
+      <path d="M 38 92 Q 60 84 82 92 L 83 102 Q 60 94 37 102 Z" fill="#b884e8"/>
+      <path d="M 34 92 Q 60 82 86 92 L 98 152 L 78 146 Q 60 152 42 146 L 22 152 Z" fill="#0a0810" opacity=".92"/>
+
+      <!-- braços -->
+      <rect x="24" y="94" width="12" height="34" rx="6" fill="#9a8ea8" transform="rotate(9 30 94)"/>
+      <rect x="84" y="94" width="12" height="34" rx="6" fill="#9a8ea8" transform="rotate(-9 90 94)"/>
+
+      <!-- cabeça -->
+      <g>
+        <path d="M 22 118 Q 18 14 60 6 Q 102 14 98 118 L 84 112 Q 92 34 60 30 Q 28 34 36 112 Z" fill="#0e0b14" transform="translate(0 2)"/>
+        <circle cx="60" cy="50" r="33" fill="url(#sbis)" stroke="#6c6376" stroke-width="2"/>
+        
+        
+        
+          <ellipse cx="47" cy="54" rx="5.5" ry="7" fill="#fff"/>
+          <circle cx="48" cy="55" r="3.4" fill="#ff4a7a"/>
+          <ellipse cx="73" cy="54" rx="5.5" ry="7" fill="#fff"/>
+          <circle cx="72" cy="55" r="3.4" fill="#ff4a7a"/>
+          <path d="M 54 70 Q 60 74 66 70" stroke="#3a2028" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+        
+        
+        <path d="M 22 118 Q 18 14 60 6 Q 102 14 98 118 L 84 112 Q 92 34 60 30 Q 28 34 36 112 Z" fill="#120e1a" stroke="#09070d" stroke-width="1.4" stroke-linejoin="round"/>
+        
+        
+      </g>
+    </g>
+  </svg>

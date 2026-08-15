@@ -256,24 +256,8 @@
 .ending-screen .stats-line { font-size: clamp(10px, 2.6vw, 12px); opacity: .6; }
 
 /* ==========================================================================
-   Intervalo (hub entre capítulos)
+   Quadro de missões e listas do mapa
    ========================================================================== */
-
-.menu-screen.hub { background: #08060d; }
-
-.hub-bg { position: absolute; inset: 0; z-index: 0; }
-.hub-bg svg { width: 100%; height: 100%; display: block; }
-.menu-screen.hub > .menu-head,
-.menu-screen.hub > .menu-body { position: relative; z-index: 1; }
-
-.hub-intro {
-  font-size: clamp(11px, 2.8vw, 13px);
-  line-height: 1.65;
-  opacity: .75;
-  text-align: center;
-  font-style: italic;
-  padding: 2px 6px 4px;
-}
 
 .row-item.mission { align-items: flex-start; }
 .row-item.mission .txt small i { opacity: .8; }
@@ -301,8 +285,6 @@
 }
 .bond-row.ready .who small { color: var(--gold); opacity: .95; }
 
-.hub-actions { justify-content: center; }
-.hub-actions .btn { flex: 1 1 auto; text-align: center; min-width: 130px; }
 
 .hub-party {
   display: grid;
@@ -328,19 +310,3 @@
 .hub-member b { font-size: clamp(10px, 2.6vw, 12px); display: block; }
 .hub-member small { font-size: clamp(9px, 2.2vw, 11px); opacity: .65; }
 
-.hub-continue {
-  width: 100%;
-  text-align: center;
-  margin-top: 8px;
-  font-size: clamp(13px, 3.2vw, 16px);
-  padding: 13px;
-}
-
-/* O cenário do Intervalo é decorativo: escurece atrás do conteúdo para o
-   texto das missões e conversas nunca competir com um telhado claro. */
-.menu-screen.hub .hub-bg::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(8, 6, 13, .82), rgba(8, 6, 13, .92));
-}

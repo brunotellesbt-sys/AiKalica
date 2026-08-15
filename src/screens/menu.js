@@ -4,6 +4,7 @@ import { el, svgNode, clear, modal, toast } from '../core/ui.js';
 import { sfx, setAudioEnabled, setMusicEnabled } from '../core/audio.js';
 import { settings, updateSettings, save, listSlots, formatPlaytime, currentPlaytime } from '../core/save.js';
 import { faceIcon } from '../art/portraits.js';
+import { faceNode } from '../art/assets.js';
 import { CHARACTERS, ELEMENTS, STYLES, STAT_LABEL } from '../data/characters.js';
 import { ITEMS, SLOTS, SHOP_STOCK } from '../data/items.js';
 import { JUTSU } from '../data/jutsu.js';
@@ -23,12 +24,6 @@ function bar(kind, value, max) {
   return b;
 }
 
-function faceNode(id, size = null) {
-  const n = el('div', {}, [svgNode(faceIcon(artOf(id), 'neutral'))]);
-  if (size) n.style.width = size;
-  return n;
-}
-
 function elemBadge(elId) {
   const e = ELEMENTS[elId] || ELEMENTS.none;
   return el('span.elem-badge', { text: `${e.icon} ${e.name}`, style: { color: e.color } });
@@ -45,7 +40,7 @@ function tabParty(body, rerender) {
     const next = expToNext(rec.level);
 
     const card = el('div.char-card.panel', {}, [
-      el('div.face', {}, [svgNode(faceIcon(artOf(rec.id), rec.hp <= 0 ? 'sad' : 'neutral'))]),
+      el('div.face', {}, [faceNode(rec.id, { art: artOf(rec.id), element: rec.element, emotion: rec.hp <= 0 ? 'sad' : 'neutral' })]),
       el('div.info', {}, [
         el('div.top', {}, [
           el('b', { text: displayName(rec.id) }),
@@ -235,7 +230,7 @@ function tabBonds(body) {
     const h = bondHearts(id);
     const level = ['Desconhecidos', 'Colegas', 'Companheiros', 'Amigos', 'Camaradas', 'Inquebrável'][h];
     body.append(el('div.bond-row', {}, [
-      el('div.mini', {}, [svgNode(faceIcon(artOf(id), h >= 3 ? 'happy' : 'neutral'))]),
+      el('div.mini', {}, [faceNode(id, { art: artOf(id), emotion: h >= 3 ? 'happy' : 'neutral' })]),
       el('div.who', {}, [
         el('b', { text: displayName(id) }),
         el('small', { text: `${level} · ${bond(id)}/100` }),

@@ -1,0 +1,21 @@
+<svg viewBox="0 0 1200 675" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs><linearGradient id="bgc1" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#f0a86a"/><stop offset="100%" stop-color="#f6d9a0"/>
+  </linearGradient><linearGradient id="bgc1w" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#4a7f9a"/><stop offset="100%" stop-color="#28546b"/>
+  </linearGradient></defs>
+      <rect width="1200" height="675" fill="url(#bgc1)"/>
+      <circle cx="880" cy="330" r="70" fill="#ffefc0"/>
+      <circle cx="880" cy="330" r="140" fill="#ffd9a0" opacity=".3"/>
+      <rect x="0" y="360" width="1200" height="200" fill="url(#bgc1w)"/>
+      <path d="M 700 360 Q 880 340 1060 360 L 1060 400 Q 880 380 700 400 Z" fill="#ffce8a" opacity=".55"/>
+      <path d="M 0 545 Q 300 520 600 548 Q 900 576 1200 542 L 1200 675 L 0 675 Z" fill="#e0c48f"/>
+      <path d="M 0 545 Q 300 520 600 548 Q 900 576 1200 542" stroke="#f2ddb0" stroke-width="8" fill="none"/>
+      <g fill="#3a5a3a">
+        <path d="M 120 560 L 128 470 L 136 560 Z"/>
+        <ellipse cx="130" cy="464" rx="52" ry="16"/>
+        <ellipse cx="112" cy="450" rx="40" ry="13" transform="rotate(-24 112 450)"/>
+        <ellipse cx="150" cy="450" rx="40" ry="13" transform="rotate(24 150 450)"/>
+      </g>
+    
+  </svg>

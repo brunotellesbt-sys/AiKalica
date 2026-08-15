@@ -1,0 +1,25 @@
+<svg viewBox="0 0 120 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="besta"
+      >
+    <ellipse cx="60" cy="163" rx="34" ry="6" fill="#000" opacity=".38"/>
+    <g>
+      <animateTransform attributeName="transform" type="translate" values="0 0; 0 -2; 0 0" dur="2.2s" repeatCount="indefinite"/>
+      <path d="M 22 120 L 26 156 L 36 156 L 34 120 Z" fill="#3d382f"/>
+      <path d="M 84 120 L 88 156 L 98 156 L 94 120 Z" fill="#3d382f"/>
+      <path d="M 18 100 Q 60 78 102 100 Q 108 130 96 142 Q 60 152 24 142 Q 12 130 18 100 Z"
+            fill="#6b6257" stroke="#3b3630" stroke-width="2"/>
+      <path d="M 18 100 Q 60 82 102 100 Q 60 108 18 100 Z" fill="#7d756b"/>
+      <path d="M 100 108 Q 128 96 132 74 Q 122 82 112 84" fill="#6b6257" stroke="#403b34" stroke-width="2"/>
+      <!-- cabeça -->
+      <path d="M 6 92 Q 2 62 24 54 Q 46 46 58 62 Q 66 78 54 94 Q 30 104 6 92 Z"
+            fill="#6b6257" stroke="#3b3630" stroke-width="2"/>
+      <path d="M 20 56 L 14 32 L 34 48 Z" fill="#3d382f"/>
+      <path d="M 44 52 L 46 28 L 58 50 Z" fill="#3d382f"/>
+      <path d="M 6 92 Q 0 84 4 76 L 20 80 Z" fill="#3d382f"/>
+      <circle cx="14" cy="80" r="3.4" fill="#1a1620"/>
+      <ellipse cx="26" cy="70" rx="6" ry="4.6" fill="#e8c34a"/>
+      <ellipse cx="26" cy="70" rx="2" ry="4.4" fill="#1a1620"/>
+      <ellipse cx="46" cy="72" rx="6" ry="4.6" fill="#e8c34a"/>
+      <ellipse cx="46" cy="72" rx="2" ry="4.4" fill="#1a1620"/>
+      <path d="M 10 86 L 18 92 L 26 86 L 34 92" stroke="#fff" stroke-width="2.4" fill="none"/>
+    </g>
+  </svg>
