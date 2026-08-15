@@ -6,7 +6,7 @@ Roda direto no navegador. **Sem build, sem dependências, sem assets externos**:
 
 ```bash
 npm start      # serve em http://localhost:8080
-npm test       # 26 testes de dados, roteiro e balanceamento
+npm test       # 27 testes de dados, roteiro e balanceamento
 ```
 
 > Precisa ser servido por HTTP (o jogo usa ES modules). Abrir o `index.html` direto do disco não funciona.
