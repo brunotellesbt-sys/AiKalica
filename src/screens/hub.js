@@ -43,7 +43,7 @@ export function openHub(opts = {}) {
 
       const bg = el('div.hub-bg');
       bg.append(svgNode(background(state.chapter >= 4 ? 'villageNight' : 'village', {
-        tint: '#0b0910', tintOpacity: .62,
+        tint: '#0b0910', tintOpacity: .8,
       })));
 
       const body = el('div.menu-body');
