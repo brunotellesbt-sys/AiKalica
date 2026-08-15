@@ -1,0 +1,56 @@
+name: Testes e Deploy no Pages
+
+on:
+  push:
+    branches: ['**']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Um deploy por vez; cancelar um deploy em andamento deixaria o site quebrado.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  testes:
+    name: Testes
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Suíte de fumaça (dados, roteiro e balanceamento)
+        run: npm test
+
+  deploy:
+    name: Publicar no GitHub Pages
+    needs: testes
+    # O site só é publicado a partir do branch padrão.
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+        with:
+          # Tenta habilitar o Pages sozinho, evitando o passo manual em
+          # Settings → Pages. Se a permissão não bastar, aí sim é preciso
+          # trocar o Source para "GitHub Actions" na mão.
+          enablement: true
+      - name: Empacotar o site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # O jogo é estático e não tem build: a raiz do repositório já é o site.
+          path: .
+      - name: Publicar
+        id: deployment
+        uses: actions/deploy-pages@v4

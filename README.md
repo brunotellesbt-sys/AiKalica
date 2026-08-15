@@ -6,10 +6,20 @@ Roda direto no navegador. **Sem build, sem dependências, sem assets externos**:
 
 ```bash
 npm start      # serve em http://localhost:8080
-npm test       # 26 testes de dados, roteiro e balanceamento
+npm test       # 27 testes de dados, roteiro e balanceamento
 ```
 
 > Precisa ser servido por HTTP (o jogo usa ES modules). Abrir o `index.html` direto do disco não funciona.
+
+## Publicar no GitHub Pages
+
+O workflow `.github/workflows/deploy-pages.yml` roda os testes em todo push e publica o site quando o commit chega ao `main`.
+
+O passo `configure-pages` usa `enablement: true`, então tenta habilitar o Pages sozinho no primeiro deploy. Se a permissão do token não for suficiente, o job falha em *"Get Pages site failed"* — nesse caso basta ajustar uma vez na mão:
+
+**Settings → Pages → Build and deployment → Source: `GitHub Actions`**
+
+O site fica em `https://<usuário>.github.io/AiKalica/`. Como o jogo é estático e usa só caminhos relativos, funciona no subdiretório sem nenhum ajuste de base path.
 
 ---
 
