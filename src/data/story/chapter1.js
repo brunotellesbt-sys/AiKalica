@@ -2,7 +2,7 @@
 
 import {
   say, narr, hero, cast, go, choice, iff, flag, bond, karma, battle,
-  chapter, bgm, sound, fx, give, decision, pause, rest, join, heal,
+  chapter, bgm, sound, fx, give, decision, pause, rest, join, heal, hub,
 } from './dsl.js';
 
 export const scenes = {
@@ -62,6 +62,7 @@ export const scenes = {
         },
       ]),
 
+      join('naruto'), join('sakura'), join('sasuke'),
       narr('Os outros times saem com seus senseis. Uma hora. Duas horas. Três.'),
       say('naruto', 'ELE TÁ ATRASADO! TRÊS HORAS! Isso não é ninja, isso é falta de respeito!', 'angry'),
       narr('Naruto encaixa um apagador na fresta da porta.'),
@@ -182,7 +183,6 @@ export const scenes = {
       ]),
 
       join('kakashi', { level: 8 }),
-      join('naruto'), join('sakura'), join('sasuke'),
       bond('naruto', 10), bond('sakura', 10), bond('sasuke', 10),
 
       narr('O Time 7 existe oficialmente a partir de hoje. Kakashi acompanha vocês por enquanto — jounin não fica de babá para sempre, ele avisa três vezes no caminho de volta.'),
@@ -234,6 +234,7 @@ export const scenes = {
       ]),
 
       give('ration', 2), give('soldierPill', 1),
+      hub({ tier: 1, title: 'A missão sai ao amanhecer. Até lá, o tempo é de vocês.' }),
       narr('Vocês partem ao amanhecer.'),
       go('ch2_road'),
     ],

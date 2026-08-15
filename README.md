@@ -6,7 +6,7 @@ Roda direto no navegador. **Sem build, sem dependências, sem assets externos**:
 
 ```bash
 npm start      # serve em http://localhost:8080
-npm test       # 27 testes de dados, roteiro e balanceamento
+npm test       # 34 testes de dados, roteiro e balanceamento
 ```
 
 > Precisa ser servido por HTTP (o jogo usa ES modules). Abrir o `index.html` direto do disco não funciona.
@@ -52,6 +52,15 @@ Escolhas com consequência real, não cosmética: salvar as famílias **ou** a p
 - **Vontade de Fogo**: barra compartilhada que enche apanhando e revidando; cheia, libera **jutsus combinados** que dependem de quem está vivo no time.
 - Passivas por personagem (Sharingan, chakra médico, muralha do Jin), 5 tipos de IA inimiga, itens de combate, fuga, crítico, multi-golpe e perfuração de defesa.
 
+### Intervalo (conteúdo opcional)
+Entre capítulos o jogo abre um **Intervalo**, que existe para resolver um problema concreto: sem ele, quem chega mal preparado num chefe só pode repetir a mesma luta no mesmo nível.
+
+- **12 missões livres** em rank D/C/B, liberadas conforme a história avança. Repetíveis para treinar e juntar ryo; a primeira conclusão dá recompensa extra.
+- **12 cenas de elo** — conversas opcionais destravadas por nível de elo, duas por companheiro. É onde o sistema de elos ganha pagamento narrativo, e não só numérico.
+- Loja, descanso e acesso ao menu no mesmo lugar.
+
+Perder uma missão nunca trava o jogo: por ser conteúdo opcional, o time volta de pé.
+
 ### Progressão
 - 7 personagens jogáveis, 51 jutsus, 40 níveis, jutsus aprendidos por nível.
 - Protagonista customizável: nome, **afinidade elemental** (muda a lista de jutsus) e **estilo de luta** (muda a curva de atributos). São escolhas de build reais, não sabor.
@@ -69,10 +78,10 @@ src/
   main.js              alterna título ↔ história
   core/                estado, RNG determinístico, save, áudio, helpers de DOM
   art/                 retratos, sprites e cenários gerados em SVG
-  data/                personagens, jutsus, itens, inimigos
-  data/story/          DSL + prólogo, capítulos 1-4, finale, finais
+  data/                personagens, jutsus, itens, inimigos, missões
+  data/story/          DSL + prólogo, capítulos 1-4, finale, finais, cenas de elo
   systems/             batalha, efeitos de status, progressão
-  screens/             título, visual novel, batalha, menu, final
+  screens/             título, visual novel, batalha, menu, intervalo, final
 tests/smoke.test.mjs
 ```
 
@@ -85,7 +94,8 @@ Separação deliberada: `systems/` é lógica pura e testável sem navegador —
 `npm test` roda sem navegador e cobre:
 
 - **Integridade de dados** — todo jutsu, item, status, drop e inimigo referenciado existe de fato.
-- **Integridade do roteiro** — todo `go`/`goto` aponta para cena existente, nenhuma cena órfã, todos os 5 finais alcançáveis.
+- **Integridade do roteiro** — todo `go`/`goto` aponta para cena existente, nenhuma cena órfã, todos os 5 finais alcançáveis, todo capítulo abrindo um Intervalo.
+- **Conteúdo opcional** — missões e cenas de elo referenciando só inimigos/itens/personagens que existem, elos destravando em ordem crescente e cada conversa rodando uma única vez.
 - **Progressão** — estilo altera atributos na direção certa, EXP sobe nível e ensina jutsu, elos e karma saturam corretamente.
 - **Balanceamento por simulação** — batalhas simuladas com IA nos dois lados, verificando que times de nível adequado vencem ≥70% dos encontros comuns e que chefes não são vitória garantida.
 

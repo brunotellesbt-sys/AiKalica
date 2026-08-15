@@ -20,6 +20,7 @@ import {
 } from '../core/state.js';
 import { runBattle } from './battle-ui.js';
 import { openMenu, openShop } from './menu.js';
+import { openHub } from './hub.js';
 import { showEnding } from './ending.js';
 
 let ui = null;
@@ -408,10 +409,17 @@ async function exec(node) {
     case 'join': {
       const fresh = !state.roster[node.id];
       recruit(node.id, node.opts?.level ?? null, node.opts || {});
-      joinParty(node.id);
+      const active = joinParty(node.id);
       if (fresh) {
         sfx('bond');
-        toast(`${displayName(node.id)} entrou para o time!`, 'good');
+        // Com o grupo cheio o recruta fica de reserva — avisar evita a
+        // confusão de "entrou no time mas não aparece na batalha".
+        toast(
+          active
+            ? `${displayName(node.id)} entrou para o time!`
+            : `${displayName(node.id)} está disponível — troque o grupo no menu (M)`,
+          active ? 'good' : 'info',
+        );
         await wait(400);
       }
       return null;
@@ -438,6 +446,31 @@ async function exec(node) {
       await openShop(node.tier ?? Math.max(1, state.chapter));
       await ensureMounted();
       return null;
+
+    case 'hub': {
+      const chosen = await openHub({ tier: node.tier, title: node.title });
+      await ensureMounted();
+
+      if (chosen?.scene) {
+        // Toca a cena de elo e reabre o Intervalo logo depois, para o jogador
+        // poder conversar com mais de um companheiro na mesma parada.
+        const s = chosen.scene;
+        queue.unshift(
+          ...(s.music ? [{ t: 'bgm', track: s.music }] : []),
+          ...(s.bg ? [{ t: 'bg', id: s.bg }] : []),
+          ...s.nodes,
+          { t: 'hub', tier: node.tier, title: node.title },
+        );
+        return null;
+      }
+
+      // Volta o cenário e a trilha da cena atual, que a conversa pode ter trocado.
+      const sc = SCENES[state.scene];
+      if (sc?.bg) setBackground(sc.bg, sc.tint);
+      music(sc?.music || null);
+      autosave();
+      return null;
+    }
 
     case 'if': {
       const branch = check(node.cond) ? node.then : node.else;

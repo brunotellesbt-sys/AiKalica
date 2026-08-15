@@ -2,7 +2,7 @@
 
 import {
   say, narr, hero, cast, go, choice, iff, flag, bond, karma, battle,
-  chapter, sound, fx, give, ryo, rest, heal, join, shop, decision, pause, set,
+  chapter, sound, fx, give, ryo, rest, heal, join, shop, decision, pause, set, hub,
 } from './dsl.js';
 
 export const scenes = {
@@ -331,8 +331,8 @@ export const scenes = {
       say('hokage', 'Existe um Exame Chunin daqui a um mês.', 'smirk'),
       say('hokage', 'Kakashi acha que vocês não estão prontos.', 'neutral'),
       say('kakashi', 'Eu acho que ninguém nunca está pronto. Também acho que é exatamente por isso que existe exame.', 'closed'),
-      shop(2),
       rest('Um mês de treino. Descanso, comida e muita bandana suja.'),
+      hub({ tier: 2, title: 'Um mês até o Exame Chunin. Dá para fazer muita coisa em um mês.' }),
       go('ch3_start'),
     ],
   },

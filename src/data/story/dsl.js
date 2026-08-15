@@ -25,6 +25,12 @@ export const join = (id, opts = {}) => ({ t: 'join', id, opts });
 export const leave = (id) => ({ t: 'leave', id });
 
 export const rest = (text) => ({ t: 'rest', text });
+
+/**
+ * Intervalo: abre a tela de conteúdo opcional (missões, conversas, loja,
+ * descanso) e só segue a história quando o jogador manda.
+ */
+export const hub = (opts = {}) => ({ t: 'hub', ...opts });
 export const shop = (tier) => ({ t: 'shop', tier });
 export const heal = (pct = 1) => ({ t: 'heal', pct });
 

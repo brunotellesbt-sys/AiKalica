@@ -14,7 +14,7 @@ import {
   availableTeamJutsu, battleRewards, syncBackToRecords, validTargets, WILL_MAX,
 } from '../systems/battle.js';
 import {
-  state, partyRecords, grantPartyExp, addRyo, addItem, itemCount, removeItem, displayName,
+  state, partyRecords, grantPartyExp, addRyo, addItem, itemCount, removeItem, displayName, bond,
 } from '../core/state.js';
 
 const ELEM_CLASS = {
@@ -315,7 +315,7 @@ export async function runBattle(config) {
 
       const showMain = () => {
         clear(cmd);
-        const combos = availableTeamJutsu(battle);
+        const combos = availableTeamJutsu(battle, bond);
         const grid = el('div.cmd-grid');
 
         const btn = (ico, label, onClick, meta, tip) =>

@@ -6,14 +6,18 @@ import assert from 'node:assert/strict';
 import { CHARACTERS, HERO_JUTSU, STYLE_JUTSU, ELEMENTS, elementMultiplier } from '../src/data/characters.js';
 import { JUTSU, TEAM_JUTSU } from '../src/data/jutsu.js';
 import { ITEMS, SHOP_STOCK } from '../src/data/items.js';
-import { ENEMIES, ENCOUNTERS } from '../src/data/enemies.js';
+import { ENEMIES } from '../src/data/enemies.js';
+import { MISSIONS, availableMissions } from '../src/data/missions.js';
+import { BOND_SCENES, allBondScenes, nextBondScene } from '../src/data/story/bonds.js';
 import { STATUS } from '../src/systems/effects.js';
 import { SCENES, START_SCENE, validateScenes } from '../src/data/story/index.js';
 import { ENDINGS, pickEnding } from '../src/data/story/endings.js';
 import { newRecord, grantExp, statOf, maxHp, expToNext } from '../src/systems/progression.js';
 import {
   createBattle, resolveAction, aiAction, turnOrder, endRound, checkEnd, battleRewards,
+  availableTeamJutsu,
 } from '../src/systems/battle.js';
+import { applyStatus } from '../src/systems/effects.js';
 import { newGame, state, recruit, addItem, itemCount, addBond, bond, karmaBalance } from '../src/core/state.js';
 import { setSeed } from '../src/core/rng.js';
 
@@ -92,9 +96,24 @@ test('membros de jutsu combinado são personagens reais', () => {
   }
 });
 
-test('encontros referenciam inimigos existentes', () => {
-  for (const [id, enc] of Object.entries(ENCOUNTERS)) {
-    for (const f of enc.foes) assert.ok(ENEMIES[f], `encontro ${id} usa inimigo inexistente: ${f}`);
+test('missões referenciam inimigos e itens existentes', () => {
+  for (const [id, m] of Object.entries(MISSIONS)) {
+    assert.ok(m.encounter?.foes?.length, `missão ${id} sem inimigos`);
+    for (const f of m.encounter.foes) assert.ok(ENEMIES[f], `missão ${id} usa inimigo inexistente: ${f}`);
+    for (const it of m.firstClear?.items || []) assert.ok(ITEMS[it], `missão ${id} dá item inexistente: ${it}`);
+    for (const c of Object.keys(m.bonds || {})) assert.ok(CHARACTERS[c], `missão ${id} dá elo a personagem inexistente: ${c}`);
+    assert.ok(m.chapter >= 1 && m.chapter <= 4, `missão ${id} com capítulo fora da faixa`);
+  }
+});
+
+test('cada capítulo tem missões disponíveis', () => {
+  for (let ch = 1; ch <= 4; ch++) {
+    assert.ok(availableMissions(ch).length > 0, `capítulo ${ch} sem nenhuma missão`);
+  }
+  // O quadro deve crescer conforme a história avança, nunca encolher.
+  for (let ch = 2; ch <= 4; ch++) {
+    assert.ok(availableMissions(ch).length >= availableMissions(ch - 1).length,
+      `o quadro encolheu do capítulo ${ch - 1} para o ${ch}`);
   }
 });
 
@@ -227,6 +246,64 @@ test('pickEnding cobre os casos principais', () => {
   assert.equal(pickEnding(base, { bondAvg: 5, karma: 0 }), 'lone');
 });
 
+test('cenas de elo são válidas e destravam em ordem', () => {
+  const seen = new Set();
+  for (const sc of allBondScenes()) {
+    assert.ok(CHARACTERS[sc.charId], `cena de elo para personagem inexistente: ${sc.charId}`);
+    assert.ok(!seen.has(sc.id), `id de cena de elo repetido: ${sc.id}`);
+    seen.add(sc.id);
+    assert.ok(sc.nodes?.length, `cena ${sc.id} está vazia`);
+    assert.ok(sc.title, `cena ${sc.id} sem título`);
+    // Cenas de elo voltam ao Intervalo sozinhas: não podem saltar de cena.
+    const jumps = sc.nodes.filter((n) => n?.t === 'go' || n?.t === 'ending');
+    assert.equal(jumps.length, 0, `cena ${sc.id} não pode conter go/ending`);
+  }
+  for (const [charId, list] of Object.entries(BOND_SCENES)) {
+    for (let i = 1; i < list.length; i++) {
+      assert.ok(list[i].minBond > list[i - 1].minBond,
+        `${charId}: cenas de elo fora de ordem crescente`);
+    }
+  }
+});
+
+test('cena de elo só aparece com elo suficiente e só uma vez', () => {
+  const flags = {};
+  assert.equal(nextBondScene('naruto', 10, flags), null, 'não deveria liberar com elo baixo');
+  const first = nextBondScene('naruto', 40, flags);
+  assert.ok(first, 'deveria liberar a primeira cena com elo 40');
+  flags[`bondScene_${first.id}`] = true;
+  const again = nextBondScene('naruto', 40, flags);
+  assert.notEqual(again?.id, first.id, 'não deveria repetir a mesma cena');
+});
+
+test('todo item dado por cena de elo existe', () => {
+  const walk = (nodes, id) => {
+    for (const n of nodes || []) {
+      if (!n || typeof n !== 'object') continue;
+      if (n.t === 'give') assert.ok(ITEMS[n.item], `cena ${id} dá item inexistente: ${n.item}`);
+      if (n.t === 'bond') assert.ok(CHARACTERS[n.id], `cena ${id} altera elo inexistente: ${n.id}`);
+      if (n.t === 'choice') for (const o of n.options || []) walk(o.then, id);
+    }
+  };
+  for (const sc of allBondScenes()) walk(sc.nodes, sc.id);
+});
+
+test('todo capítulo termina abrindo um Intervalo', () => {
+  // Sem isso o jogador perde o acesso ao conteúdo opcional daquele capítulo.
+  let hubs = 0;
+  const walk = (nodes) => {
+    for (const n of nodes || []) {
+      if (!n || typeof n !== 'object') continue;
+      if (n.t === 'hub') hubs++;
+      if (n.t === 'choice') for (const o of n.options || []) walk(o.then);
+      if (n.t === 'if') { walk(n.then); walk(n.else); }
+      if (n.t === 'battle') walk(n.then);
+    }
+  };
+  for (const sc of Object.values(SCENES)) walk(sc.nodes);
+  assert.ok(hubs >= 4, `esperado ao menos 4 Intervalos na história, achei ${hubs}`);
+});
+
 // ======================================================== progressão ========
 section('Progressão');
 
@@ -278,10 +355,12 @@ test('inventário adiciona e remove', () => {
 // ========================================================== batalha =========
 section('Batalha');
 
-function simulate(foeIds, level, { seed = 1, maxRounds = 200 } = {}) {
+const partyRecordsOf = () => state.party.map((id) => state.roster[id]).filter(Boolean);
+
+function simulate(foeIds, level, { seed = 1, maxRounds = 200, objective = null } = {}) {
   setSeed(seed);
   const allies = state.party.map((id) => state.roster[id]);
-  const battle = createBattle({ allies, foes: foeIds, level, difficulty: 'normal' });
+  const battle = createBattle({ allies, foes: foeIds, level, difficulty: 'normal', objective });
   let result = null;
   let rounds = 0;
   while (!result && rounds < maxRounds) {
@@ -395,6 +474,60 @@ test('fraqueza elemental aumenta o dano', () => {
     neutral += run('soundGenin', 1000 + i);   // sem elemento → neutro
   }
   assert.ok(weak > neutral, `água contra fogo deveria doer mais (${Math.round(weak)} vs ${Math.round(neutral)})`);
+});
+
+test('o teste dos sinos é vencível com o time já formado', () => {
+  // Regressão: os três companheiros entravam no grupo só DEPOIS desta luta,
+  // o que tornava o objetivo impossível (0/20 em simulação) e forçava o
+  // jogador a perder uma batalha roteirizada.
+  let wins = 0;
+  const runs = 10;
+  for (let i = 0; i < runs; i++) {
+    newGame({ name: 'Sino', element: 'wind', style: 'taijutsu' });
+    recruit('naruto', 3); recruit('sakura', 3); recruit('sasuke', 3);
+    for (const rec of Object.values(state.roster)) { rec.level = 3; rec.hp = maxHp(rec); }
+    assert.equal(state.party.length, 4, 'o Time 7 deve estar completo antes do teste');
+    const { result } = simulate(['kakashiSpar'], 6, {
+      seed: 900 + i, objective: { damageThreshold: .62 },
+    });
+    if (result === 'win') wins++;
+  }
+  assert.ok(wins >= runs * 0.7, `esperado ≥70% de sucesso no teste dos sinos, obtido ${wins}/${runs}`);
+});
+
+test('o Time 7 entra no grupo antes do teste dos sinos', () => {
+  // Ordem no roteiro: os `join` têm que vir antes da batalha dos sinos.
+  const nodes = SCENES.ch1_start.nodes;
+  const joined = nodes.filter((n) => n?.t === 'join').map((n) => n.id);
+  for (const id of ['naruto', 'sakura', 'sasuke']) {
+    assert.ok(joined.includes(id), `${id} deveria entrar no grupo em ch1_start`);
+  }
+});
+
+test('combo do Time 7 exige elo mínimo', () => {
+  newGame({ name: 'Combo', element: 'fire', style: 'taijutsu' });
+  recruit('naruto', 10); recruit('sakura', 10); recruit('sasuke', 10);
+  for (const rec of Object.values(state.roster)) rec.level = 10;
+  const battle = createBattle({ allies: partyRecordsOf(), foes: ['banditThug'], level: 5 });
+  battle.will = 100;
+
+  const lowBond = () => 10;
+  const highBond = () => 80;
+  const idsLow = availableTeamJutsu(battle, lowBond).map((c) => c.id);
+  const idsHigh = availableTeamJutsu(battle, highBond).map((c) => c.id);
+
+  assert.ok(!idsLow.includes('teamSeven'), 'teamSeven não deveria aparecer com elo baixo');
+  assert.ok(idsHigh.includes('teamSeven'), 'teamSeven deveria aparecer com elo alto');
+  // Combos sem exigência de elo continuam disponíveis nos dois casos.
+  assert.ok(idsLow.includes('fireWind'), 'fireWind não exige elo e deveria aparecer');
+});
+
+test('marionete é imune a veneno', () => {
+  const battle = createBattle({ allies: [newRecord('hero', 5)], foes: ['swampPuppet'], level: 7 });
+  const puppet = battle.foes[0];
+  const applied = applyStatus(puppet, 'poison', 3);
+  assert.equal(applied, false, 'veneno não deveria pegar');
+  assert.equal(puppet.status.length, 0);
 });
 
 test('barra de Vontade de Fogo enche com o combate', () => {

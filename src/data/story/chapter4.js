@@ -2,7 +2,7 @@
 
 import {
   say, narr, hero, cast, go, choice, iff, flag, bond, karma, battle,
-  chapter, sound, fx, give, ryo, rest, heal, join, shop, decision, pause, set,
+  chapter, sound, fx, give, ryo, rest, heal, join, shop, decision, pause, set, hub,
 } from './dsl.js';
 
 export const scenes = {
@@ -14,6 +14,7 @@ export const scenes = {
       say('kakashi', 'Rastreamos o pergaminho até as ruínas do templo velho, ao norte. Território neutro, sem jurisdição, perfeito para quem não quer testemunha.', 'determined'),
       say('kakashi', 'O ritual do Eclipse precisa de duas coisas: o pergaminho — que ele já tem — e o recipiente.', 'sad'),
       say('kakashi', 'Ele vai vir buscar você. É só questão de quando.', 'sad'),
+      hub({ tier: 4, title: 'Últimos preparativos. Depois disso não tem volta.' }),
       cast('hokage'),
       say('hokage', 'Duas opções, e ambas são ruins.', 'neutral'),
       say('hokage', 'Uma: fortificamos a vila e esperamos ele vir. Vantagem de terreno, todos os jounin disponíveis, e civis no meio do fogo cruzado.', 'neutral'),

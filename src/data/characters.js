@@ -136,7 +136,7 @@ export const CHARACTERS = {
     playable: true,
     base: { hp: 112, ck: 82, atk: 19, nin: 21, def: 13, res: 18, spd: 16, luck: 11 },
     growth: { hp: 13, ck: 12, atk: 2.4, nin: 2.7, def: 1.4, res: 2.2, spd: 1.7, luck: 1.0 },
-    jutsu: ['mysticPalm', 'cherryStrike', 'antidoteTouch', 'innerFocus', 'shatterPunch'],
+    jutsu: ['mysticPalm', 'cherryStrike', 'antidoteTouch', 'innerFocus', 'reviveAlly', 'shatterPunch'],
     bio: 'Controle de chakra impecável. Cura o time entre um golpe e outro — e o golpe dela abre o chão.',
     art: {
       skin: '#fbd3b4', hair: '#f09ab8', hairStyle: 'long', eye: '#5eb06a',

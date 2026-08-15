@@ -51,7 +51,8 @@ export const ENEMIES = {
     jutsu: ['attack', 'puppetStrings', 'poisonNeedle'], exp: 64, ryo: 130,
     art: { type: 'puppet', wood: '#8a6a44', wood2: '#4f3c26', eye: '#d44a2a' },
     drops: [{ id: 'antidote', chance: .5 }, { id: 'explosiveTag', chance: .12 }],
-    resist: { poison: 1, burn: 0 },
+    // Marionete de madeira: veneno não faz efeito nela.
+    immuneTo: ['poison'],
   },
   soundGenin: {
     id: 'soundGenin', name: 'Genin do Som', element: 'none', lv: 9, ai: 'caster',
@@ -128,32 +129,11 @@ export const ENEMIES = {
   },
 };
 
-/** Grupos de inimigos usados nos encontros da história. */
-export const ENCOUNTERS = {
-  training:      { foes: ['dummy', 'dummy'], bg: 'trainingField', name: 'Treino Matinal' },
-  academyDuel:   { foes: ['academyRival'], bg: 'academy', name: 'Duelo de Formatura' },
-  banditPair:    { foes: ['banditThug', 'banditThug'], bg: 'forest', name: 'Emboscada na Trilha' },
-  banditSquad:   { foes: ['banditThug', 'banditArcher', 'banditThug'], bg: 'forest', name: 'Bando na Estrada' },
-  wolves:        { foes: ['forestWolf', 'forestWolf', 'forestWolf'], bg: 'forest', name: 'Matilha Faminta' },
-  bellTest:      { foes: ['kakashiSpar'], bg: 'trainingField', name: 'Teste dos Sinos' },
-  bridgeAmbush:  { foes: ['roguePupil', 'banditArcher', 'banditThug'], bg: 'bridge', name: 'Emboscada na Ponte' },
-  karasuFight:   { foes: ['karasu', 'banditThug', 'banditThug'], bg: 'bridge', name: 'Karasu, o Corvo', boss: true },
-  puppetRoom:    { foes: ['swampPuppet', 'swampPuppet'], bg: 'cave', name: 'Sala das Marionetes' },
-  forestOfDeath: { foes: ['soundGenin', 'soundGenin'], bg: 'deepForest', name: 'Time do Som' },
-  jinDuel:       { foes: ['jinRival'], bg: 'deepForest', name: 'Jin de Ishigakure', boss: true },
-  swampBoss:     { foes: ['ryujin', 'swampPuppet'], bg: 'swamp', name: 'Ryūjin dos Pântanos', boss: true },
-  arenaMatch:    { foes: ['soundGenin', 'mistAssassin'], bg: 'arena', name: 'Rodada Final do Exame' },
-  shadowPatrol:  { foes: ['shadowAcolyte', 'shadowBrute'], bg: 'ruins', name: 'Patrulha das Sombras' },
-  shadowGate:    { foes: ['shadowAcolyte', 'shadowAcolyte', 'shadowBrute'], bg: 'ruins', name: 'Guardiões do Portão' },
-  kagemasaFight: { foes: ['kagemasaP1'], bg: 'ruinsNight', name: 'Yoru Kagemasa', boss: true },
-  kagemasaFinal: { foes: ['kagemasaP2'], bg: 'eclipse', name: 'O Selo Aberto', boss: true, noFlee: true },
-};
-
 // Kakashi aparece como "inimigo" no teste dos sinos — luta contida, sem morte.
 ENEMIES.kakashiSpar = {
   id: 'kakashiSpar', name: 'Kakashi', title: 'Sensei (avaliando)',
   // Ele está avaliando, não tentando vencer: uma ação por rodada.
-  element: 'lightning', lv: 10, ai: 'boss', boss: true, spar: true, actions: 1,
+  element: 'lightning', lv: 10, ai: 'boss', boss: true, actions: 1,
   stats: { hp: 1150, ck: 120, atk: 26, nin: 28, def: 26, res: 26, spd: 30, luck: 14 },
   jutsu: ['attack', 'attack', 'earthHeadhunter', 'lightningHound', 'copyStance'],
   exp: 200, ryo: 0,

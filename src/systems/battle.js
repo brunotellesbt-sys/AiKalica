@@ -688,11 +688,23 @@ export function checkEnd(battle) {
   return null;
 }
 
-/** Combos disponíveis agora. */
-export function availableTeamJutsu(battle) {
+/**
+ * Combos disponíveis agora.
+ * @param {function} [bondOf] devolve o elo (0-100) com um personagem; usado
+ *   pelos combos que exigem confiança mínima entre os membros.
+ */
+export function availableTeamJutsu(battle, bondOf = null) {
   if (battle.will < WILL_MAX) return [];
   const alive = battle.livingAllies().map((u) => u.id);
-  return Object.values(TEAM_JUTSU).filter((c) => c.members.every((m) => alive.includes(m)));
+  return Object.values(TEAM_JUTSU).filter((c) => {
+    if (!c.members.every((m) => alive.includes(m))) return false;
+    if (c.requiresBond && bondOf) {
+      // `requiresBond` é em corações (0-5); cada coração vale 20 de elo.
+      const need = c.requiresBond * 20;
+      return c.members.every((m) => m === 'hero' || bondOf(m) >= need);
+    }
+    return true;
+  });
 }
 
 /** Recompensas ao vencer. */

@@ -2,7 +2,7 @@
 
 import {
   say, narr, hero, cast, go, choice, iff, flag, bond, karma, battle,
-  chapter, sound, fx, give, ryo, rest, heal, join, shop, decision, pause, leave,
+  chapter, sound, fx, give, ryo, rest, heal, join, shop, decision, pause, leave, hub,
 } from './dsl.js';
 
 export const scenes = {
@@ -271,8 +271,8 @@ export const scenes = {
         bond('jin', 12),
       ]),
 
-      shop(3),
       rest('Três dias de preparação. A vila inteira em alerta.'),
+      hub({ tier: 3, title: 'Três dias. A vila em alerta, e ninguém conseguindo dormir direito.' }),
       go('ch4_start'),
     ],
   },
